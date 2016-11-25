@@ -638,7 +638,7 @@ obj/item/weapon/weldingtool/proc/switched_off(mob/user)
 	usesound = 'sound/items/Crowbar.ogg'
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	force = 5
+	force = 15
 	throwforce = 7
 	w_class = 2
 	materials = list(MAT_METAL=50)

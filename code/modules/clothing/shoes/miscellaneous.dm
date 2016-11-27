@@ -176,6 +176,13 @@
 	var/recharging_time = 0 //time until next dash
 	var/jumping = FALSE //are we mid-jump?
 
+/obj/item/clothing/shoes/leather
+	name = "leather shoes"
+	desc = "A sturdy pair of leather shoes."
+	icon_state = "leather"
+	item_color = "brown"
+
+
 /obj/item/clothing/shoes/bhop/ui_action_click(mob/user, action)
 	if(!isliving(usr))
 		return

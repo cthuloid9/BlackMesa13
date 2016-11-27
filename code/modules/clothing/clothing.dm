@@ -150,7 +150,10 @@ var/list/damaged_clothes_icons = list()
 		priority_overlays -= damaged_clothes_icons[index]
 
 
-//Ears: currently only used for headsets and earmuffs
+
+// ********
+// Ears: currently only used for headsets and earmuffs
+// ********
 /obj/item/clothing/ears
 	name = "ears"
 	w_class = 1
@@ -168,7 +171,11 @@ var/list/damaged_clothes_icons = list()
 	put_on_delay = 25
 	resistance_flags = FLAMMABLE
 
-//Glasses
+
+
+// ********
+// Glasses
+// ********
 /obj/item/clothing/glasses
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
@@ -196,7 +203,10 @@ BLIND     // can't see anything
 */
 
 
-//Gloves
+
+// ********
+// Gloves
+// ********
 /obj/item/clothing/gloves
 	name = "gloves"
 	gender = PLURAL //Carn: for grammarically correct text-parsing
@@ -229,7 +239,11 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/proc/Touch(atom/A, proximity)
 	return 0 // return 1 to cancel attack_hand()
 
-//Head
+
+
+// ********
+// Head
+// ********
 /obj/item/clothing/head
 	name = "head"
 	icon = 'icons/obj/clothing/hats.dmi'
@@ -254,7 +268,10 @@ BLIND     // can't see anything
 		M.update_inv_head()
 
 
-//Neck
+
+// ********
+// Neck
+// ********
 /obj/item/clothing/neck
 	name = "necklace"
 	icon = 'icons/obj/clothing/neck.dmi'
@@ -273,7 +290,10 @@ BLIND     // can't see anything
 				. += image("icon"='icons/effects/blood.dmi', "icon_state"="maskblood")
 
 
-//Mask
+
+// ********
+// Mask
+// ********
 /obj/item/clothing/mask
 	name = "mask"
 	icon = 'icons/obj/clothing/masks.dmi'
@@ -335,8 +355,9 @@ BLIND     // can't see anything
 
 
 
-
-//Shoes
+// ********
+// Shoes
+// ********
 /obj/item/clothing/shoes
 	name = "shoes"
 	icon = 'icons/obj/clothing/shoes.dmi'
@@ -383,7 +404,11 @@ BLIND     // can't see anything
 /obj/item/proc/negates_gravity()
 	return 0
 
-//Suit
+
+
+// ********
+// Suit
+// ********
 /obj/item/clothing/suit
 	icon = 'icons/obj/clothing/suits.dmi'
 	name = "suit"
@@ -411,7 +436,7 @@ BLIND     // can't see anything
 
 //Spacesuit
 //Note: Everything in modules/clothing/spacesuits should have the entire suit grouped together.
-//      Meaning the the suit is defined directly after the corrisponding helmet. Just like below!
+//      Meaning the suit is defined directly after the corrisponding helmet. Just like below!
 /obj/item/clothing/head/helmet/space
 	name = "space helmet"
 	icon_state = "spaceold"
@@ -453,8 +478,11 @@ BLIND     // can't see anything
 	put_on_delay = 80
 	resistance_flags = 0
 
-//Under clothing
 
+
+// ********
+// Under clothing
+// ********
 /obj/item/clothing/under
 	icon = 'icons/obj/clothing/uniforms.dmi'
 	name = "under"
@@ -685,6 +713,11 @@ BLIND     // can't see anything
 			body_parts_covered |= CHEST
 	return adjusted
 
+
+
+// ********
+// Misc. Procs
+// ********
 /obj/item/clothing/proc/weldingvisortoggle()			//Malk: proc to toggle welding visors on helmets, masks, goggles, etc.
 	if(!can_use(usr))
 		return

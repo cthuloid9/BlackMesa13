@@ -29,8 +29,8 @@ Chief Medical Officer
 	id = /obj/item/weapon/card/id/silver
 	belt = /obj/item/device/pda/heads/cmo
 	ears = /obj/item/device/radio/headset/heads/cmo
-	uniform = /obj/item/clothing/under/rank/chief_medical_officer
-	shoes = /obj/item/clothing/shoes/sneakers/brown
+	uniform = /obj/item/clothing/under/rank/scientist
+	shoes = /obj/item/clothing/shoes/leather
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	l_hand = /obj/item/weapon/storage/firstaid/regular
 	suit_store = /obj/item/device/flashlight/pen
@@ -72,8 +72,8 @@ Medical Doctor
 
 	belt = /obj/item/device/pda/medical
 	ears = /obj/item/device/radio/headset/headset_med
-	uniform = /obj/item/clothing/under/rank/medical
-	shoes = /obj/item/clothing/shoes/sneakers/white
+	uniform = /obj/item/clothing/under/rank/scientist
+	shoes = /obj/item/clothing/shoes/leather
 	suit =  /obj/item/clothing/suit/toggle/labcoat
 	l_hand = /obj/item/weapon/storage/firstaid/regular
 	suit_store = /obj/item/device/flashlight/pen
@@ -107,8 +107,8 @@ Chemist
 	glasses = /obj/item/clothing/glasses/science
 	belt = /obj/item/device/pda/chemist
 	ears = /obj/item/device/radio/headset/headset_med
-	uniform = /obj/item/clothing/under/rank/chemist
-	shoes = /obj/item/clothing/shoes/sneakers/white
+	uniform = /obj/item/clothing/under/rank/scientist
+	shoes = /obj/item/clothing/shoes/leather
 	suit =  /obj/item/clothing/suit/toggle/labcoat
 
 	backpack = /obj/item/weapon/storage/backpack/chemistry
@@ -139,8 +139,8 @@ Geneticist
 
 	belt = /obj/item/device/pda/geneticist
 	ears = /obj/item/device/radio/headset/headset_medsci
-	uniform = /obj/item/clothing/under/rank/geneticist
-	shoes = /obj/item/clothing/shoes/sneakers/white
+	uniform = /obj/item/clothing/under/rank/scientist
+	shoes = /obj/item/clothing/shoes/leather
 	suit =  /obj/item/clothing/suit/toggle/labcoat
 	suit_store =  /obj/item/device/flashlight/pen
 
@@ -172,9 +172,9 @@ Virologist
 
 	belt = /obj/item/device/pda/viro
 	ears = /obj/item/device/radio/headset/headset_med
-	uniform = /obj/item/clothing/under/rank/virologist
+	uniform = /obj/item/clothing/under/rank/scientist
 	mask = /obj/item/clothing/mask/surgical
-	shoes = /obj/item/clothing/shoes/sneakers/white
+	shoes = /obj/item/clothing/shoes/leather
 	suit =  /obj/item/clothing/suit/toggle/labcoat
 	suit_store =  /obj/item/device/flashlight/pen
 

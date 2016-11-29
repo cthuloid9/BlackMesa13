@@ -12,9 +12,9 @@
 /obj/item/clothing/under/rank/security
 	name = "security jumpsuit"
 	desc = "A tactical security jumpsuit for officers complete with nanotrasen belt buckle."
-	icon_state = "rsecurity"
-	item_state = "r_suit"
-	item_color = "rsecurity"
+	icon_state = "security"
+	item_state = "gy_suit"
+	item_color = "security"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0, fire = 30, acid = 30)
 	strip_delay = 50
 	alt_covers_chest = 1

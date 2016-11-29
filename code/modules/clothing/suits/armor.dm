@@ -14,7 +14,7 @@
 
 /obj/item/clothing/suit/armor/vest
 	name = "armor"
-	desc = "A slim armored vest that protects against most types of damage."
+	desc = "A slim armored vest that protects against most types of damage. This one has a blueshift badge on it."
 	icon_state = "armoralt"
 	item_state = "armoralt"
 	blood_overlay_type = "armor"

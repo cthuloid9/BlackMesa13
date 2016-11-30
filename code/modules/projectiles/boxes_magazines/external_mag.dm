@@ -3,6 +3,8 @@
 
 ///////////EXTERNAL MAGAZINES////////////////
 
+
+// -=[ 10mm mags ]=-
 /obj/item/ammo_box/magazine/m10mm
 	name = "pistol magazine (10mm)"
 	desc = "A gun magazine."
@@ -28,40 +30,34 @@
 	desc= "A gun magazine. Loaded with rounds which penetrate armour, but are less effective against normal targets"
 	ammo_type = /obj/item/ammo_casing/c10mm/ap
 
-/obj/item/ammo_box/magazine/m45
-	name = "handgun magazine (.45)"
-	icon_state = "45-8"
-	ammo_type = /obj/item/ammo_casing/c45
-	caliber = ".45"
-	max_ammo = 8
+// -=[ 9mm glock mags ]=-
+/obj/item/ammo_box/magazine/mglock
+	name = "glock magazine (9mm)"
+	icon_state = "9mmglock-8"
+	ammo_type = /obj/item/ammo_casing/c9mm
+	caliber = "9mm"
+	max_ammo = 17
 
-/obj/item/ammo_box/magazine/m45/update_icon()
+/obj/item/ammo_box/magazine/mglock/update_icon()
 	..()
-	icon_state = "45-[ammo_count() ? "8" : "0"]"
+	icon_state = "9mmglock-[ammo_count() ? "8" : "0"]"
 
-/obj/item/ammo_box/magazine/wt550m9
-	name = "wt550 magazine (4.6x30mm)"
-	icon_state = "46x30mmt-20"
-	ammo_type = /obj/item/ammo_casing/c46x30mm
-	caliber = "4.6x30mm"
-	max_ammo = 20
 
-/obj/item/ammo_box/magazine/wt550m9/update_icon()
+
+// -=[ 9mm pistol mags ]=-
+/obj/item/ammo_box/magazine/pistolm9mm
+	name = "pistol magazine (9mm)"
+	icon_state = "9x19p-8"
+	ammo_type = /obj/item/ammo_casing/c9mm
+	caliber = "9mm"
+	max_ammo = 15
+
+/obj/item/ammo_box/magazine/pistolm9mm/update_icon()
 	..()
-	icon_state = "46x30mmt-[round(ammo_count(),4)]"
+	icon_state = "9x19p-[ammo_count() ? "8" : "0"]"
 
-/obj/item/ammo_box/magazine/wt550m9/wtap
-	name = "wt550 magazine (Armour Piercing 4.6x30mm)"
-	ammo_type = /obj/item/ammo_casing/c46x30mmap
 
-/obj/item/ammo_box/magazine/wt550m9/wttx
-	name = "wt550 magazine (Toxin Tipped 4.6x30mm)"
-	ammo_type = /obj/item/ammo_casing/c46x30mmtox
-
-/obj/item/ammo_box/magazine/wt550m9/wtic
-	name = "wt550 magazine (Incindiary 4.6x30mm)"
-	ammo_type = /obj/item/ammo_casing/c46x30mminc
-
+// -=[ 9mm uzi mags ]=-
 /obj/item/ammo_box/magazine/uzim9mm
 	name = "uzi magazine (9mm)"
 	icon_state = "uzi9mm-32"
@@ -73,6 +69,8 @@
 	..()
 	icon_state = "uzi9mm-[round(ammo_count(),4)]"
 
+
+// -=[ 9mm smg mags ]=-
 /obj/item/ammo_box/magazine/smgm9mm
 	name = "SMG magazine (9mm)"
 	icon_state = "smg9mm-42"
@@ -96,17 +94,21 @@
 	name = "SMG Magazine (Incindiary 9mm)"
 	ammo_type = /obj/item/ammo_casing/c9mminc
 
-/obj/item/ammo_box/magazine/pistolm9mm
-	name = "pistol magazine (9mm)"
-	icon_state = "9x19p-8"
-	ammo_type = /obj/item/ammo_casing/c9mm
-	caliber = "9mm"
-	max_ammo = 15
 
-/obj/item/ammo_box/magazine/pistolm9mm/update_icon()
+// -=[ .45 mags ]=-
+/obj/item/ammo_box/magazine/m45
+	name = "handgun magazine (.45)"
+	icon_state = "45-8"
+	ammo_type = /obj/item/ammo_casing/c45
+	caliber = ".45"
+	max_ammo = 8
+
+/obj/item/ammo_box/magazine/m45/update_icon()
 	..()
-	icon_state = "9x19p-[ammo_count() ? "8" : "0"]"
+	icon_state = "45-[ammo_count() ? "8" : "0"]"
 
+
+// -=[ .45 smg mags]=-
 /obj/item/ammo_box/magazine/smgm45
 	name = "SMG magazine (.45)"
 	icon_state = "c20r45-24"
@@ -119,6 +121,8 @@
 	..()
 	icon_state = "c20r45-[round(ammo_count(),2)]"
 
+
+// -=[ .45 drum mags ]=-
 obj/item/ammo_box/magazine/tommygunm45
 	name = "drum magazine (.45)"
 	icon_state = "drum45"
@@ -126,6 +130,33 @@ obj/item/ammo_box/magazine/tommygunm45
 	caliber = ".45"
 	max_ammo = 50
 
+
+// -=[ wt550 mags ]=-
+/obj/item/ammo_box/magazine/wt550m9
+	name = "wt550 magazine (4.6x30mm)"
+	icon_state = "46x30mmt-20"
+	ammo_type = /obj/item/ammo_casing/c46x30mm
+	caliber = "4.6x30mm"
+	max_ammo = 20
+
+/obj/item/ammo_box/magazine/wt550m9/update_icon()
+	..()
+	icon_state = "46x30mmt-[round(ammo_count(),4)]"
+
+/obj/item/ammo_box/magazine/wt550m9/wtap
+	name = "wt550 magazine (Armour Piercing 4.6x30mm)"
+	ammo_type = /obj/item/ammo_casing/c46x30mmap
+
+/obj/item/ammo_box/magazine/wt550m9/wttx
+	name = "wt550 magazine (Toxin Tipped 4.6x30mm)"
+	ammo_type = /obj/item/ammo_casing/c46x30mmtox
+
+/obj/item/ammo_box/magazine/wt550m9/wtic
+	name = "wt550 magazine (Incindiary 4.6x30mm)"
+	ammo_type = /obj/item/ammo_casing/c46x30mminc
+
+
+// -=[ .50ae mags ]=-
 /obj/item/ammo_box/magazine/m50
 	name = "handgun magazine (.50ae)"
 	icon_state = "50ae"
@@ -135,6 +166,8 @@ obj/item/ammo_box/magazine/tommygunm45
 	max_ammo = 7
 	multiple_sprites = 1
 
+
+// -=[ .75 mags ]=-
 /obj/item/ammo_box/magazine/m75
 	name = "specialized magazine (.75)"
 	icon_state = "75"
@@ -143,6 +176,8 @@ obj/item/ammo_box/magazine/tommygunm45
 	multiple_sprites = 2
 	max_ammo = 8
 
+
+// -=[ toploader mags ]=-
 /obj/item/ammo_box/magazine/m556
 	name = "toploader magazine (5.56mm)"
 	icon_state = "5.56m"
@@ -152,6 +187,8 @@ obj/item/ammo_box/magazine/tommygunm45
 	max_ammo = 30
 	multiple_sprites = 2
 
+
+// -=[ shotgun drum mags ]=-
 /obj/item/ammo_box/magazine/m12g
 	name = "shotgun magazine (12g taser slugs)"
 	desc = "A drum magazine."

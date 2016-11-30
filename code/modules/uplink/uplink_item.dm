@@ -136,6 +136,12 @@ var/list/uplink_items = list() // Global list so we only initialize this once.
 /datum/uplink_item/dangerous
 	category = "Conspicuous and Dangerous Weapons"
 
+/datum/uplink_item/dangerous/glock
+	name = "Glock 17"
+	desc = "Standard military spec sidearm, takes 9mm rounds"
+	item = /obj/item/weapon/gun/ballistic/automatic/pistol/glock
+	cost = 5
+
 /datum/uplink_item/dangerous/pistol
 	name = "Stechkin Pistol"
 	desc = "A small, easily concealable handgun that uses 10mm auto rounds in 8-round magazines and is compatible \

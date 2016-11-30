@@ -28,10 +28,10 @@
 			return
 
 		if("bond") // 29 tc
-			new /obj/item/weapon/gun/ballistic/automatic/pistol(src)
-			new /obj/item/weapon/suppressor(src)
-			new /obj/item/ammo_box/magazine/m10mm(src)
-			new /obj/item/ammo_box/magazine/m10mm(src)
+			new /obj/item/weapon/gun/ballistic/automatic/pistol/glock(src)
+			//new /obj/item/weapon/suppressor(src)
+			new /obj/item/ammo_box/magazine/mglock(src)
+			new /obj/item/ammo_box/magazine/mglock(src)
 			new /obj/item/clothing/under/chameleon(src)
 			new /obj/item/weapon/card/id/syndicate(src)
 			new /obj/item/weapon/reagent_containers/syringe/stimulants(src)
@@ -131,7 +131,7 @@
 			new /obj/item/weapon/grenade/plastic/c4 (src) // 1 tc
 			new /obj/item/weapon/card/emag(src) // 6 tc
 			return
-		
+
 		if("ninja") // 33 tc worth
 			new /obj/item/weapon/katana(src) // Unique , hard to tell how much tc this is worth. 8 tc?
 			new /obj/item/weapon/implanter/adrenalin(src) // 8 tc

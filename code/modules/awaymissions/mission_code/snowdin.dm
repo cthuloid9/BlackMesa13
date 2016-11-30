@@ -189,7 +189,7 @@ obj/effect/mob_spawn/human/syndicatesoldier/coldres
 	uniform = /obj/item/clothing/under/syndicate/coldres
 	shoes = /obj/item/clothing/shoes/combat/coldres
 	radio = /obj/item/device/radio/headset/syndicate/alt
-	pocket1 = /obj/item/weapon/gun/ballistic/automatic/pistol
+	pocket1 = /obj/item/weapon/gun/ballistic/automatic/pistol/glock
 	pocket2 = /obj/item/weapon/card/id/syndicate
 	has_id = 0
 

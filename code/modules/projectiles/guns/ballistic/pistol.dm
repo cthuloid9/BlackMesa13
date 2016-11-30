@@ -23,6 +23,16 @@
 	mag_type = /obj/item/ammo_box/magazine/m45
 	can_suppress = 0
 
+// -=[ GLOCK ]=-
+/obj/item/weapon/gun/ballistic/automatic/pistol/glock
+	name = "\improper glock"
+	desc = "The standard issue weapon used by the Black Mesa security guards."
+	icon_state = "pistol"
+	w_class = 2
+	mag_type = /obj/item/ammo_box/magazine/mglock
+	can_suppress = 0
+	fire_sound = 'sound/weapons/Gunshot_glock.ogg'
+
 /obj/item/weapon/gun/ballistic/automatic/pistol/deagle
 	name = "desert eagle"
 	desc = "A robust .50 AE handgun."

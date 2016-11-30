@@ -303,7 +303,7 @@
 	ears = /obj/item/device/radio/headset/syndicate/alt
 	l_pocket = /obj/item/weapon/pinpointer/syndicate
 	id = /obj/item/weapon/card/id/syndicate
-	belt = /obj/item/weapon/gun/ballistic/automatic/pistol
+	belt = /obj/item/weapon/gun/ballistic/automatic/pistol/glock
 	backpack_contents = list(/obj/item/weapon/storage/box/syndie=1)
 
 	var/tc = 25
@@ -341,7 +341,7 @@
 	r_hand = /obj/item/weapon/gun/ballistic/automatic/shotgun/bulldog
 	backpack_contents = list(/obj/item/weapon/storage/box/syndie=1,\
 		/obj/item/weapon/tank/jetpack/oxygen/harness=1,\
-		/obj/item/weapon/gun/ballistic/automatic/pistol=1)
+		/obj/item/weapon/gun/ballistic/automatic/pistol/glock=1)
 
 /datum/outfit/syndicate/full/post_equip(mob/living/carbon/human/H)
 	..()

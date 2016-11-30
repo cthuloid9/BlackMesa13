@@ -38,7 +38,7 @@
 	caliber = "9mm"
 	max_ammo = 17
 
-/obj/item/ammo_box/magazine/pistolm9mm/update_icon()
+/obj/item/ammo_box/magazine/mglock/update_icon()
 	..()
 	icon_state = "9mmglock-[ammo_count() ? "8" : "0"]"
 

@@ -38,85 +38,103 @@
 /obj/item/device/pda/medical
 	name = "medical PDA"
 	default_cartridge = /obj/item/weapon/cartridge/medical
-	icon_state = "pda-medical"
+	//icon_state = "pda-medical"
+	icon_state = "pda-med"
+
 
 /obj/item/device/pda/viro
 	name = "virology PDA"
 	default_cartridge = /obj/item/weapon/cartridge/medical
-	icon_state = "pda-virology"
+	//icon_state = "pda-virology"
+	icon_state = "pda-sec"
 
 /obj/item/device/pda/engineering
 	name = "engineering PDA"
 	default_cartridge = /obj/item/weapon/cartridge/engineering
-	icon_state = "pda-engineer"
+	//icon_state = "pda-engineer"
+	icon_state = "pda-engie"
 
 /obj/item/device/pda/security
 	name = "security PDA"
 	default_cartridge = /obj/item/weapon/cartridge/security
-	icon_state = "pda-security"
+	//icon_state = "pda-security"
+	icon_state = "pda-sec"
 
 /obj/item/device/pda/detective
 	name = "detective PDA"
 	default_cartridge = /obj/item/weapon/cartridge/detective
-	icon_state = "pda-detective"
+	//icon_state = "pda-detective"
+	icon_state = "pda-sec"
 
 /obj/item/device/pda/warden
 	name = "warden PDA"
 	default_cartridge = /obj/item/weapon/cartridge/security
-	icon_state = "pda-warden"
+	//icon_state = "pda-warden"
+	icon_state = "pda-sec"
 
 /obj/item/device/pda/janitor
 	name = "janitor PDA"
 	default_cartridge = /obj/item/weapon/cartridge/janitor
-	icon_state = "pda-janitor"
+	//icon_state = "pda-janitor"
+	icon_state = "pda-generic"
 	ttone = "slip"
 
 /obj/item/device/pda/toxins
 	name = "scientist PDA"
 	default_cartridge = /obj/item/weapon/cartridge/signal/toxins
-	icon_state = "pda-science"
+	//icon_state = "pda-science"
+	icon_state = "pda-sci"
 	ttone = "boom"
 
 /obj/item/device/pda/mime
 	name = "mime PDA"
 	default_cartridge = /obj/item/weapon/cartridge/mime
-	icon_state = "pda-mime"
+	//icon_state = "pda-mime"
+	icon_state = "pda-generic"
 	silent = 1
 	ttone = "silence"
 
 /obj/item/device/pda/heads
 	default_cartridge = /obj/item/weapon/cartridge/head
-	icon_state = "pda-hop"
+	//icon_state = "pda-hop"
+	icon_state = "pda-generic" // To be replaced later with special wood paneling version
 
 /obj/item/device/pda/heads/hop
 	name = "head of personnel PDA"
 	default_cartridge = /obj/item/weapon/cartridge/hop
-	icon_state = "pda-hop"
+	//icon_state = "pda-hop"
+	icon_state = "pda-generic"
 
 /obj/item/device/pda/heads/hos
 	name = "head of security PDA"
 	default_cartridge = /obj/item/weapon/cartridge/hos
-	icon_state = "pda-hos"
+	//icon_state = "pda-hos"
+	icon_state = "pda-sec"
+
 
 /obj/item/device/pda/heads/ce
 	name = "chief engineer PDA"
 	default_cartridge = /obj/item/weapon/cartridge/ce
-	icon_state = "pda-ce"
+	//icon_state = "pda-ce"
+	icon_state = "pda-engie"
 
 /obj/item/device/pda/heads/cmo
 	name = "chief medical officer PDA"
 	default_cartridge = /obj/item/weapon/cartridge/cmo
-	icon_state = "pda-cmo"
+	//icon_state = "pda-cmo"
+	icon_state = "pda-med"
 
 /obj/item/device/pda/heads/rd
 	name = "research director PDA"
 	default_cartridge = /obj/item/weapon/cartridge/rd
-	icon_state = "pda-rd"
+	//icon_state = "pda-rd"
+	icon_state = "pda-sci"
 
 /obj/item/device/pda/captain
 	name = "captain PDA"
 	default_cartridge = /obj/item/weapon/cartridge/captain
-	icon_state = "pda-captain"
+	//icon_state = "pda-captain"
+	icon_state = "pda-generic"
 	detonate = 0
 
 /obj/item/device/pda/cargo
@@ -127,44 +145,52 @@
 /obj/item/device/pda/quartermaster
 	name = "quartermaster PDA"
 	default_cartridge = /obj/item/weapon/cartridge/quartermaster
-	icon_state = "pda-qm"
+	//icon_state = "pda-qm"
+	icon_state = "pda-cargo"
 
 /obj/item/device/pda/shaftminer
 	name = "shaft miner PDA"
-	icon_state = "pda-miner"
+	//icon_state = "pda-miner"
+	icon_state = "pda-cargo"
 
 /obj/item/device/pda/syndicate
 	default_cartridge = /obj/item/weapon/cartridge/syndicate
-	icon_state = "pda-syndi"
+	//icon_state = "pda-syndi"
+	icon_state = "pda-generic"
 	name = "military PDA"
 	owner = "John Doe"
 	hidden = 1
 
 /obj/item/device/pda/chaplain
 	name = "chaplain PDA"
-	icon_state = "pda-chaplain"
+	//icon_state = "pda-chaplain"
+	icon_state = "pda-generic"
 	ttone = "holy"
 
 /obj/item/device/pda/lawyer
 	name = "lawyer PDA"
 	default_cartridge = /obj/item/weapon/cartridge/lawyer
-	icon_state = "pda-lawyer"
+	//icon_state = "pda-lawyer"
+	icon_state = "pda-generic"
 	ttone = "objection"
 
 /obj/item/device/pda/botanist
 	name = "botanist PDA"
 	//default_cartridge = /obj/item/weapon/cartridge/botanist
-	icon_state = "pda-hydro"
+	//icon_state = "pda-hydro"
+	icon_state = "pda-sci"
 
 /obj/item/device/pda/roboticist
 	name = "roboticist PDA"
-	icon_state = "pda-roboticist"
+	//icon_state = "pda-roboticist"
+	icon_state = "pda-sci"
 	default_cartridge = /obj/item/weapon/cartridge/roboticist
 
 /obj/item/device/pda/librarian
 	name = "librarian PDA"
-	icon_state = "pda-library"
-	icon_alert = "pda-r-library"
+	//icon_state = "pda-library"
+	icon_state = "pda-generic"
+	//icon_alert = "pda-r-library"
 	default_cartridge = /obj/item/weapon/cartridge/librarian
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This model is a WGW-11 series e-reader."
 	note = "Congratulations, your station has chosen the Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant!"
@@ -173,29 +199,35 @@
 
 /obj/item/device/pda/clear
 	name = "clear PDA"
-	icon_state = "pda-clear"
+	//icon_state = "pda-clear"
+	icon_state = "pda-generic" //To be replaced later with transparent case PDA
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This model is a special edition with a transparent case."
 	note = "Congratulations, you have chosen the Thinktronic 5230 Personal Data Assistant Deluxe Special Max Turbo Limited Edition!"
 
 /obj/item/device/pda/cook
 	name = "cook PDA"
-	icon_state = "pda-cook"
+	//icon_state = "pda-cook"
+	icon_state = "pda-generic"
 
 /obj/item/device/pda/bar
 	name = "bartender PDA"
-	icon_state = "pda-bartender"
+	//icon_state = "pda-bartender"
+	icon_state = "pda-generic"
 
 /obj/item/device/pda/atmos
 	name = "atmospherics PDA"
 	default_cartridge = /obj/item/weapon/cartridge/atmos
-	icon_state = "pda-atmos"
+	//icon_state = "pda-atmos"
+	icon_state = "pda-engie"
 
 /obj/item/device/pda/chemist
 	name = "chemist PDA"
 	default_cartridge = /obj/item/weapon/cartridge/chemistry
-	icon_state = "pda-chemistry"
+	//icon_state = "pda-chemistry"
+	icon_state = "pda-sci"
 
 /obj/item/device/pda/geneticist
 	name = "geneticist PDA"
 	default_cartridge = /obj/item/weapon/cartridge/medical
-	icon_state = "pda-genetics"
+	//icon_state = "pda-genetics"
+	icon_state = "pda-sci"

@@ -117,10 +117,10 @@
 	pockets = /obj/item/weapon/storage/internal/pocket/shoes
 
 /obj/item/clothing/shoes/blackworkboots
- 	name = "black workboots"
- 	desc = "A black pair of steel-toed work boots designed for use in industrial settings. Safety first."
- 	icon_state = "jackboots"
- 	item_state = "jackboots"
+	name = "black workboots"
+	desc = "A black pair of steel-toed work boots designed for use in industrial settings. Safety first."
+	icon_state = "jackboots"
+	item_state = "jackboots"
 	strip_delay = 40
 	put_on_delay = 40
 	pockets = /obj/item/weapon/storage/internal/pocket/shoes

@@ -111,7 +111,16 @@
 	name = "work boots"
 	desc = "Nanotrasen-issue Engineering lace-up work boots for the especially blue-collar."
 	icon_state = "workboots"
-	item_state = "jackboots"
+	item_state = "workboots"
+	strip_delay = 40
+	put_on_delay = 40
+	pockets = /obj/item/weapon/storage/internal/pocket/shoes
+
+/obj/item/clothing/shoes/blackworkboots
+ 	name = "black workboots"
+ 	desc = "A black pair of steel-toed work boots designed for use in industrial settings. Safety first."
+ 	icon_state = "jackboots"
+ 	item_state = "jackboots"
 	strip_delay = 40
 	put_on_delay = 40
 	pockets = /obj/item/weapon/storage/internal/pocket/shoes

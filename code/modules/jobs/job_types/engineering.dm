@@ -80,8 +80,8 @@ Station Engineer
 	l_pocket = /obj/item/device/pda/engineering
 	ears = /obj/item/device/radio/headset/headset_eng
 	uniform = /obj/item/clothing/under/rank/engineer
-	shoes = /obj/item/clothing/shoes/workboots
-	head = /obj/item/clothing/head/hardhat
+	shoes = /obj/item/clothing/shoes/blackworkboots
+	head = /obj/item/clothing/head/helmet/engineering
 	r_pocket = /obj/item/device/t_scanner
 
 	backpack = /obj/item/weapon/storage/backpack/industrial

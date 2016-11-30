@@ -52,6 +52,8 @@ Cargo Technician
 	belt = /obj/item/device/pda/cargo
 	ears = /obj/item/device/radio/headset/headset_cargo
 	uniform = /obj/item/clothing/under/rank/cargotech
+	shoes = /obj/item/clothing/shoes/workboots
+	head = /obj/item/clothing/head/helmet/cargo
 
 
 /*

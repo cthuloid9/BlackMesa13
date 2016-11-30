@@ -201,19 +201,19 @@ var/list/sec_departments = list("engineering", "supply", "medical", "science")
 	belt = /obj/item/device/pda/security
 	ears = /obj/item/device/radio/headset/headset_sec/alt
 	uniform = /obj/item/clothing/under/rank/security
-	gloves = /obj/item/clothing/gloves/color/black
-	head = /obj/item/clothing/head/helmet/sec
-	suit = /obj/item/clothing/suit/armor/vest/alt
+	//gloves = /obj/item/clothing/gloves/color/black
+	head = /obj/item/clothing/head/helmet
+	suit = /obj/item/clothing/suit/armor/vest
 	shoes = /obj/item/clothing/shoes/jackboots
-	l_pocket = /obj/item/weapon/restraints/handcuffs
-	r_pocket = /obj/item/device/assembly/flash/handheld
-	suit_store = /obj/item/weapon/gun/energy/e_gun/advtaser
-	backpack_contents = list(/obj/item/weapon/melee/baton/loaded=1)
+	//l_pocket = /obj/item/weapon/restraints/handcuffs
+	//r_pocket = /obj/item/device/assembly/flash/handheld
+	//suit_store = /obj/item/weapon/gun/energy/e_gun/advtaser
+	//backpack_contents = list(/obj/item/weapon/melee/baton/loaded=1)
 
-	backpack = /obj/item/weapon/storage/backpack/security
-	satchel = /obj/item/weapon/storage/backpack/satchel/sec
-	dufflebag = /obj/item/weapon/storage/backpack/dufflebag/sec
-	box = /obj/item/weapon/storage/box/security
+	//backpack = /obj/item/weapon/storage/backpack/security
+	//satchel = /obj/item/weapon/storage/backpack/satchel/sec
+	//dufflebag = /obj/item/weapon/storage/backpack/dufflebag/sec
+	//box = /obj/item/weapon/storage/box/security
 
 	var/department = null
 	var/tie = null
@@ -234,25 +234,25 @@ var/list/sec_departments = list("engineering", "supply", "medical", "science")
 				dep_access = list(access_mailsorting, access_mining, access_mining_station)
 				destination = /area/security/checkpoint/supply
 				spawn_point = locate(/obj/effect/landmark/start/depsec/supply) in department_security_spawns
-				tie = /obj/item/clothing/tie/armband/cargo
+				//tie = /obj/item/clothing/tie/armband/cargo
 			if("engineering")
 				ears = /obj/item/device/radio/headset/headset_sec/alt/department/engi
 				dep_access = list(access_construction, access_engine)
 				destination = /area/security/checkpoint/engineering
 				spawn_point = locate(/obj/effect/landmark/start/depsec/engineering) in department_security_spawns
-				tie = /obj/item/clothing/tie/armband/engine
+				//tie = /obj/item/clothing/tie/armband/engine
 			if("medical")
 				ears = /obj/item/device/radio/headset/headset_sec/alt/department/med
 				dep_access = list(access_medical)
 				destination = /area/security/checkpoint/medical
 				spawn_point = locate(/obj/effect/landmark/start/depsec/medical) in department_security_spawns
-				tie =  /obj/item/clothing/tie/armband/medblue
+				//tie =  /obj/item/clothing/tie/armband/medblue
 			if("science")
 				ears = /obj/item/device/radio/headset/headset_sec/alt/department/sci
 				dep_access = list(access_research)
 				destination = /area/security/checkpoint/science
 				spawn_point = locate(/obj/effect/landmark/start/depsec/science) in department_security_spawns
-				tie = /obj/item/clothing/tie/armband/science
+				//tie = /obj/item/clothing/tie/armband/science
 
 /datum/outfit/job/security/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	..()

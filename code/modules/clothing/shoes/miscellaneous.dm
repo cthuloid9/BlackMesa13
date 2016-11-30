@@ -111,6 +111,15 @@
 	name = "work boots"
 	desc = "Nanotrasen-issue Engineering lace-up work boots for the especially blue-collar."
 	icon_state = "workboots"
+	item_state = "workboots"
+	strip_delay = 40
+	put_on_delay = 40
+	pockets = /obj/item/weapon/storage/internal/pocket/shoes
+
+/obj/item/clothing/shoes/blackworkboots
+	name = "black workboots"
+	desc = "A black pair of steel-toed work boots designed for use in industrial settings. Safety first."
+	icon_state = "jackboots"
 	item_state = "jackboots"
 	strip_delay = 40
 	put_on_delay = 40
@@ -175,6 +184,13 @@
 	var/recharging_rate = 60 //default 6 seconds between each dash
 	var/recharging_time = 0 //time until next dash
 	var/jumping = FALSE //are we mid-jump?
+
+/obj/item/clothing/shoes/leather
+	name = "leather shoes"
+	desc = "A sturdy pair of leather shoes."
+	icon_state = "leather"
+	item_color = "brown"
+
 
 /obj/item/clothing/shoes/bhop/ui_action_click(mob/user, action)
 	if(!isliving(usr))

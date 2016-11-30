@@ -33,8 +33,8 @@ Research Director
 	id = /obj/item/weapon/card/id/silver
 	belt = /obj/item/device/pda/heads/rd
 	ears = /obj/item/device/radio/headset/heads/rd
-	uniform = /obj/item/clothing/under/rank/research_director
-	shoes = /obj/item/clothing/shoes/sneakers/brown
+	uniform = /obj/item/clothing/under/rank/scientist
+	shoes = /obj/item/clothing/shoes/leather
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	l_hand = /obj/item/weapon/clipboard
 	l_pocket = /obj/item/device/laser_pointer
@@ -76,8 +76,8 @@ Scientist
 	belt = /obj/item/device/pda/toxins
 	ears = /obj/item/device/radio/headset/headset_sci
 	uniform = /obj/item/clothing/under/rank/scientist
-	shoes = /obj/item/clothing/shoes/sneakers/white
-	suit = /obj/item/clothing/suit/toggle/labcoat/science
+	shoes = /obj/item/clothing/shoes/leather
+	suit = /obj/item/clothing/suit/toggle/labcoat
 
 	backpack = /obj/item/weapon/storage/backpack/science
 	satchel = /obj/item/weapon/storage/backpack/satchel/tox
@@ -107,8 +107,9 @@ Roboticist
 	belt = /obj/item/weapon/storage/belt/utility/full
 	l_pocket = /obj/item/device/pda/roboticist
 	ears = /obj/item/device/radio/headset/headset_sci
-	uniform = /obj/item/clothing/under/rank/roboticist
+	uniform = /obj/item/clothing/under/rank/scientist
 	suit = /obj/item/clothing/suit/toggle/labcoat
+	shoes = /obj/item/clothing/shoes/leather
 
 	backpack = /obj/item/weapon/storage/backpack/science
 	satchel = /obj/item/weapon/storage/backpack/satchel/tox

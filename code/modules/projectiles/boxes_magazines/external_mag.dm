@@ -30,6 +30,19 @@
 	desc= "A gun magazine. Loaded with rounds which penetrate armour, but are less effective against normal targets"
 	ammo_type = /obj/item/ammo_casing/c10mm/ap
 
+// -=[ 9mm glock mags ]=-
+/obj/item/ammo_box/magazine/mglock
+	name = "glock magazine (9mm)"
+	icon_state = "9mmglock-8"
+	ammo_type = /obj/item/ammo_casing/c9mm
+	caliber = "9mm"
+	max_ammo = 17
+
+/obj/item/ammo_box/magazine/pistolm9mm/update_icon()
+	..()
+	icon_state = "9mmglock-[ammo_count() ? "8" : "0"]"
+
+
 
 // -=[ 9mm pistol mags ]=-
 /obj/item/ammo_box/magazine/pistolm9mm

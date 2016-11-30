@@ -377,6 +377,7 @@
 	max_w_class = 3
 	can_hold = list(
 		/obj/item/weapon/gun/ballistic/automatic/pistol,
+		/obj/item/weapon/gun/ballistic/automatic/pistol/glock,
 		/obj/item/weapon/gun/ballistic/revolver,
 		/obj/item/ammo_box,
 		)

@@ -77,15 +77,15 @@
 
 			dat += "(25 Influence) "
 			if(points >= 25)
-				dat += "<a href='?src=\ref[src];purchase=pistol'>10mm Pistol</a><br>"
+				dat += "<a href='?src=\ref[src];purchase=pistol'>Glock 17</a><br>"
 			else
-				dat += "10mm Pistol<br>"
+				dat += "Glock 17<br>"
 
 			dat += "&nbsp;&#8627;(10 Influence) "
 			if(points >= 10)
-				dat += "<a href='?src=\ref[src];purchase=10mmammo'>10mm Ammo</a><br>"
+				dat += "<a href='?src=\ref[src];purchase=9mmammo'>9mm Ammo</a><br>"
 			else
-				dat += "10mm Ammo<br>"
+				dat += "9mm Ammo<br>"
 
 			dat += "(60 Influence) "
 			if(points >= 60)
@@ -198,11 +198,11 @@
 					pointcost = 1
 			if("pistol")
 				if(gang.points >= 25)
-					item_type = /obj/item/weapon/gun/ballistic/automatic/pistol
+					item_type = /obj/item/weapon/gun/ballistic/automatic/pistol/glock
 					pointcost = 25
-			if("10mmammo")
+			if("9mmammo")
 				if(gang.points >= 10)
-					item_type = /obj/item/ammo_box/magazine/m10mm
+					item_type = /obj/item/ammo_box/magazine/mglock
 					pointcost = 10
 			if("uzi")
 				if(gang.points >= 60)

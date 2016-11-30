@@ -23,7 +23,7 @@
 	lootdoubles = 0
 
 	loot = list(
-				/obj/item/weapon/gun/ballistic/automatic/pistol = 8,
+				/obj/item/weapon/gun/ballistic/automatic/pistol/glock = 8,
 				/obj/item/weapon/gun/ballistic/shotgun/automatic/combat = 5,
 				/obj/item/weapon/gun/ballistic/revolver/mateba,
 				/obj/item/weapon/gun/ballistic/automatic/pistol/deagle

@@ -206,7 +206,7 @@ Botanist
 
 
 /*
-Janitor
+Janitor - Why is janitor part of cargo? its a civ job.
 */
 /datum/job/janitor
 	title = "Janitor"
@@ -231,4 +231,5 @@ Janitor
 	belt = /obj/item/device/pda/janitor
 	ears = /obj/item/device/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/janitor
+	head = /obj/item/clothing/head/soft/janitor
 	backpack_contents = list(/obj/item/device/modular_computer/tablet/preset/advanced=1)

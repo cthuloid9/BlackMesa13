@@ -112,15 +112,15 @@ Hobo
 /datum/job/hobo
 	title = "Hobo"
 	flag = HOBO
-	department = "External"
 	department_head = list("Jesus")
+	department_flag = EXTERNAL
 	faction = "Individual"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "Jesus"
 	selection_color = "#515151"
 
-	outfut = /datum/outfit/job/hobo
+	outfit = /datum/outfit/job/hobo
 
 	access = list(access_maint_tunnels)
 	minimal_access = list(access_maint_tunnels)
@@ -128,12 +128,12 @@ Hobo
 /datum/outfit/job/hobo
 	name = "Hobo"
 
-	suit = /obj/item/clothing/suit/det_suit //These will do for now, but they're too clean and have a tie built in.
+	suit = /obj/item/clothing/suit/hobocoat
 	shoes = /obj/item/clothing/shoes/laceup
 	gloves = /obj/item/clothing/gloves/fingerless
 	l_pocket = /obj/item/weapon/lighter
 	head = /obj/item/clothing/head/beanie
-	under = /obj/item/clothing/under/rank/det
+	uniform = /obj/item/clothing/suit/hobocoat
 
 	pda_slot = null
 	box = null

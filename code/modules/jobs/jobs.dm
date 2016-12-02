@@ -26,6 +26,7 @@ var/const/VIROLOGIST		=(1<<6)
 
 
 var/const/CIVILIAN			=(1<<2)
+var/const/EXTERNAL 			=(1<<3)
 
 var/const/HOP				=(1<<0)
 var/const/BARTENDER			=(1<<1)

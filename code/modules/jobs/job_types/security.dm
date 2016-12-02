@@ -51,7 +51,7 @@ Head of Security
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel = /obj/item/weapon/storage/backpack/satchel/sec
 	dufflebag = /obj/item/weapon/storage/backpack/dufflebag/sec
-	box = /obj/item/weapon/storage/box/security
+	//box = /obj/item/weapon/storage/box/survival
 
 /datum/outfit/job/hos/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	..()
@@ -107,7 +107,7 @@ Warden
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel = /obj/item/weapon/storage/backpack/satchel/sec
 	dufflebag = /obj/item/weapon/storage/backpack/dufflebag/sec
-	box = /obj/item/weapon/storage/box/security
+	//box = /obj/item/weapon/storage/box/security
 
 
 /datum/outfit/job/warden/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)

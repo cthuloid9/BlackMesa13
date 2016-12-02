@@ -130,3 +130,10 @@
 	icon_state = "emtsoft"
 	item_color = "emt"
 	dog_fashion = null
+
+/obj/item/clothing/head/soft/janitor
+	name = "janitor's cap"
+	desc = "It's a baseball hat in a tasteless red color. Its faded with time."
+	icon_state = "janitorsoft"
+	item_color = "janitor"
+	dog_fashion = null

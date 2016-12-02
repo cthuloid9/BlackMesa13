@@ -198,13 +198,14 @@ var/list/sec_departments = list("engineering", "supply", "medical", "science")
 /datum/outfit/job/security
 	name = "Security Officer"
 
-	belt = /obj/item/device/pda/security
+	belt = /obj/item/device/flashlight/militarylight
 	ears = /obj/item/device/radio/headset/headset_sec/alt
 	uniform = /obj/item/clothing/under/rank/security
 	//gloves = /obj/item/clothing/gloves/color/black
 	head = /obj/item/clothing/head/helmet
 	suit = /obj/item/clothing/suit/armor/vest
 	shoes = /obj/item/clothing/shoes/jackboots
+	l_pocket = /obj/item/device/pda/security
 	//l_pocket = /obj/item/weapon/restraints/handcuffs
 	//r_pocket = /obj/item/device/assembly/flash/handheld
 	//suit_store = /obj/item/weapon/gun/energy/e_gun/advtaser

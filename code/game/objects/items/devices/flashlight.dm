@@ -140,6 +140,15 @@
 	brightness_on = 5 // A little better than the standard flashlight.
 	hitsound = 'sound/weapons/genhit1.ogg'
 
+/obj/item/device/flashlight/militarylight
+	name = "military light"
+	desc = "An L-shaped military flashlight with a belt clip."
+	icon_state = "militarylight"
+	item_state = "militarylight"
+	brightness_on = 5 // A little better than the standard flashlight.
+	slot_flags = SLOT_BELT
+
+
 // the desk lamps are a bit special
 /obj/item/device/flashlight/lamp
 	name = "desk lamp"

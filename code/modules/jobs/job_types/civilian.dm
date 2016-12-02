@@ -107,6 +107,39 @@ Mime
 	H.rename_self("mime")
 
 /*
+Hobo
+*/
+/datum/job/hobo
+	title = "Hobo"
+	flag = HOBO
+	department = "External"
+	department_head = list("Jesus")
+	faction = "Individual"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "Jesus"
+	selection_color = "#515151"
+
+	outfut = /datum/outfit/job/hobo
+
+	access = list(access_maint_tunnels)
+	minimal_access = list(access_maint_tunnels)
+
+/datum/outfit/job/hobo
+	name = "Hobo"
+
+	suit = /obj/item/clothing/suit/det_suit //These will do for now, but they're too clean and have a tie built in.
+	shoes = /obj/item/clothing/shoes/laceup
+	gloves = /obj/item/clothing/gloves/fingerless
+	l_pocket = /obj/item/weapon/lighter
+	head = /obj/item/clothing/head/beanie
+	under = /obj/item/clothing/under/rank/det
+
+	pda_slot = null
+	box = null
+
+
+/*
 Librarian
 */
 /datum/job/librarian

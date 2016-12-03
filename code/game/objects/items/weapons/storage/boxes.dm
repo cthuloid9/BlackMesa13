@@ -60,15 +60,17 @@
 // Ordinary survival box
 /obj/item/weapon/storage/box/survival/New()
 	..()
-	new /obj/item/clothing/mask/breath(src)
-	new /obj/item/weapon/tank/internals/emergency_oxygen(src)
-	new /obj/item/weapon/reagent_containers/hypospray/medipen(src)
+	new /obj/item/stack/medical/gauze(src)
+	new /obj/item/device/flashlight/flare(src)
+	new /obj/item/device/flashlight/flare(src)
 
 /obj/item/weapon/storage/box/survival/radio/New()
 	..()
 	new /obj/item/device/radio/off(src)
 
-/obj/item/weapon/storage/box/survival_mining/New()
+
+// These aren't really needed, But I'll leave them here incase we want them for something else
+/*/obj/item/weapon/storage/box/survival_mining/New()
 	..()
 	new /obj/item/clothing/mask/gas/explorer(src)
 	new /obj/item/weapon/tank/internals/emergency_oxygen/engi(src)
@@ -102,7 +104,7 @@
 
 /obj/item/weapon/storage/box/security/radio/New()
 	..()
-	new /obj/item/device/radio/off(src)
+	new /obj/item/device/radio/off(src) */
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"

@@ -41,7 +41,7 @@ Chief Engineer
 	backpack = /obj/item/weapon/storage/backpack/industrial
 	satchel = /obj/item/weapon/storage/backpack/satchel/eng
 	dufflebag = /obj/item/weapon/storage/backpack/dufflebag/engineering
-	box = /obj/item/weapon/storage/box/engineer
+	//box = /obj/item/weapon/storage/box/engineer
 	pda_slot = slot_l_store
 
 /datum/outfit/job/ce/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
@@ -87,7 +87,7 @@ Station Engineer
 	backpack = /obj/item/weapon/storage/backpack/industrial
 	satchel = /obj/item/weapon/storage/backpack/satchel/eng
 	dufflebag = /obj/item/weapon/storage/backpack/dufflebag/engineering
-	box = /obj/item/weapon/storage/box/engineer
+	//box = /obj/item/weapon/storage/box/engineer
 	pda_slot = slot_l_store
 	backpack_contents = list(/obj/item/device/modular_computer/tablet/preset/advanced=1)
 
@@ -123,6 +123,6 @@ Atmospheric Technician
 	backpack = /obj/item/weapon/storage/backpack/industrial
 	satchel = /obj/item/weapon/storage/backpack/satchel/eng
 	dufflebag = /obj/item/weapon/storage/backpack/dufflebag/engineering
-	box = /obj/item/weapon/storage/box/engineer
+	//box = /obj/item/weapon/storage/box/engineer
 	pda_slot = slot_l_store
 	backpack_contents = list(/obj/item/device/modular_computer/tablet/preset/advanced=1)

@@ -95,6 +95,14 @@
 	item_color = "darkholme"
 	can_adjust = 0
 
+/obj/item/clothing/under/hoboclothes
+	name = "grimey clothes"
+	desc = "These clothes have been worn for far too long without cleaning. They smell and look awful."
+	icon_state = "hoboclothes"
+	item_state = "det"
+	item_color = "hoboclothes"
+	can_adjust = 0
+
 /obj/item/clothing/under/rank/vice
 	name = "vice officer's jumpsuit"
 	desc = "It's the standard issue pretty-boy outfit, as seen on Holo-Vision."

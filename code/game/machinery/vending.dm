@@ -627,6 +627,7 @@
 
 /*
  * Vending machine types
+ * This whole section should be in a different file, same way jobs are defined and then jobtypes is a subdirectory.
  */
 
 /*
@@ -655,6 +656,71 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	vend_delay = 0
 */
 
+//
+// -=[ BLACK MESA VENDING MACHINES ]=-
+//
+
+//Soda-Pop vendor [ORANGE]
+/obj/machinery/vending/sodapopvendor
+	name = "\improper Soda-Pop Vending Machine"
+	desc = "An orange Soda-Pop brand drink vending machine. Other drinks are available"
+	icon = 'icons/obj/vending_bm13.dmi'
+	icon_state = "sodapop"
+	vend_delay = 15
+	//Taken from 'cola' vender. I'd like to replace this with actual HL1 themed drinks in the future.
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_mountain_wind = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/starkist = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_up = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/lemon_lime = 10)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/thirteenloko = 6)
+
+//Rutta Grape vendor [PURPLE]
+//Essentially a reskin of Soda-Pop
+/obj/machinery/vending/ruttagrapevendor
+	name = "\improper Rutta Grape Vending Machine"
+	desc = "A purple Rutta Grape brand drink vending machine. Other drinks are available"
+	icon = 'icons/obj/vending_bm13.dmi'
+	icon_state = "ruttagrape"
+	vend_delay = 15
+	//Taken from 'cola' vender. I'd like to replace this with actual HL1 themed drinks in the future.
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_mountain_wind = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/starkist = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_up = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/lemon_lime = 10)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/thirteenloko = 6)
+
+//Enjoy! vendor [GREEN]
+//More likely to vend things like juice and water instead of soda.
+/obj/machinery/vending/liquidenjoymentvendor
+	name = "\improper Liquid Enjoyment Vending Machine"
+	desc = "A green Liquid Enjoyment brand drink vending machine. The image on its front fills you with the desire to consume." //<insert vaporwave midi>
+	icon = 'icons/obj/vending_bm13.dmi'
+	icon_state = "enjoy"
+	vend_delay = 15
+	//Taken from 'cola' vender. I'd like to replace this things like fruit juice and possile a fake "fiji" water.
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_mountain_wind = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/starkist = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_up = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/lemon_lime = 10)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/thirteenloko = 6)
+
+//Snack vendor [WOOD]
+/obj/machinery/vending/snackvendor
+	name = "Vending machine" //Generic wood panel vending machine
+	desc = "A wood panel snack machine. It contains a wide variety of snacks."
+	icon = 'icons/obj/vending_bm13.dmi'
+	icon_state = "snack"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 6,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 6,/obj/item/weapon/reagent_containers/food/snacks/chips =6,
+					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 6,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 6,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 6,
+					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 6)
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6)
+	refill_canister = /obj/item/weapon/vending_refill/snack
+
+
+
+//
+// -=[ SPACE STATION VENDING MACHINES ]=-
+//
 /obj/machinery/vending/boozeomat
 	name = "\improper Booze-O-Mat"
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."

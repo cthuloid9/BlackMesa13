@@ -51,7 +51,7 @@ Head of Security
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel = /obj/item/weapon/storage/backpack/satchel/sec
 	dufflebag = /obj/item/weapon/storage/backpack/dufflebag/sec
-	box = /obj/item/weapon/storage/box/security
+	//box = /obj/item/weapon/storage/box/survival
 
 /datum/outfit/job/hos/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	..()
@@ -107,7 +107,7 @@ Warden
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel = /obj/item/weapon/storage/backpack/satchel/sec
 	dufflebag = /obj/item/weapon/storage/backpack/dufflebag/sec
-	box = /obj/item/weapon/storage/box/security
+	//box = /obj/item/weapon/storage/box/security
 
 
 /datum/outfit/job/warden/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
@@ -205,11 +205,13 @@ var/list/sec_departments = list("engineering", "supply", "medical", "science")
 	head = /obj/item/clothing/head/helmet
 	suit = /obj/item/clothing/suit/armor/vest
 	shoes = /obj/item/clothing/shoes/jackboots
-	l_pocket = /obj/item/device/pda/security
+	//l_pocket = /obj/item/device/pda/security
 	//l_pocket = /obj/item/weapon/restraints/handcuffs
 	//r_pocket = /obj/item/device/assembly/flash/handheld
 	//suit_store = /obj/item/weapon/gun/energy/e_gun/advtaser
 	//backpack_contents = list(/obj/item/weapon/melee/baton/loaded=1)
+
+	pda_slot = slot_l_store
 
 	//backpack = /obj/item/weapon/storage/backpack/security
 	//satchel = /obj/item/weapon/storage/backpack/satchel/sec

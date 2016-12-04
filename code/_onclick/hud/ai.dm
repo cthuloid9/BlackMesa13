@@ -75,7 +75,7 @@
 	var/mob/living/silicon/ai/AI = usr
 	AI.ai_alerts()
 
-/obj/screen/ai/announcement
+/*/obj/screen/ai/announcement
 	name = "Make Announcement"
 	icon_state = "announcement"
 
@@ -83,7 +83,7 @@
 	if(..())
 		return
 	var/mob/living/silicon/ai/AI = usr
-	AI.announcement()
+	AI.announcement() */
 
 /obj/screen/ai/call_shuttle
 	name = "Call Emergency Shuttle"
@@ -200,9 +200,9 @@
 	static_inventory += using
 
 //Announcement
-	using = new /obj/screen/ai/announcement()
-	using.screen_loc = ui_ai_announcement
-	static_inventory += using
+//	using = new /obj/screen/ai/announcement()
+//	using.screen_loc = ui_ai_announcement
+//	static_inventory += using
 
 //Shuttle
 	using = new /obj/screen/ai/call_shuttle()

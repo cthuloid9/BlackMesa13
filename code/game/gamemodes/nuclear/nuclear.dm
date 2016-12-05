@@ -304,7 +304,8 @@
 	l_pocket = /obj/item/weapon/pinpointer/syndicate
 	id = /obj/item/weapon/card/id/syndicate
 	belt = /obj/item/weapon/gun/ballistic/automatic/pistol/glock
-	backpack_contents = list(/obj/item/weapon/storage/box/syndie=1)
+	//backpack_contents = list(/obj/item/weapon/storage/box/syndie=1)
+	backpack_contents = list(/obj/item/weapon/storage/box/survival=1)
 
 	var/tc = 25
 
@@ -339,7 +340,7 @@
 	r_pocket = /obj/item/weapon/tank/internals/emergency_oxygen/engi
 	belt = /obj/item/weapon/storage/belt/military
 	r_hand = /obj/item/weapon/gun/ballistic/automatic/shotgun/bulldog
-	backpack_contents = list(/obj/item/weapon/storage/box/syndie=1,\
+	backpack_contents = list(/obj/item/weapon/storage/box/survival=1,\
 		/obj/item/weapon/tank/jetpack/oxygen/harness=1,\
 		/obj/item/weapon/gun/ballistic/automatic/pistol/glock=1)
 

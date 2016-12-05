@@ -14,7 +14,7 @@ var/const/VOX_DELAY = 10
 proc/vox_announcement_help()
 
 	var/dat = "Here is a list of words the VOX Voice Synthesis Announcement System is able to pronounce in announcements over the facility's PA system.<BR> \
-	<LI>Due to the complexity of the calculations required to synthesise messages, the VOX System limits announcements to a maximum of 30 words..</LI>\
+	<LI>Due to the complexity of the calculations required to synthesise messages, the VOX System limits announcements to a maximum of 30 words.</LI>\
 	<LI>Do not use punctuation as you would normally, if you want a pause you can use the full stop and comma characters by separating them with spaces, like so: 'Alpha . Test , Bravo'.</LI></UL>\
 	<font class='bad'>WARNING:</font><BR>Abuse of this system will not be taken lightly and may result in demotion or termination of employment contract<HR>"
 

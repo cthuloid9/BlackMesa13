@@ -17,6 +17,11 @@
 	for(var/file in args)
 		src << browse_rsc(file)
 
+//Sends resource files to client cache, takes one list as arg
+/client/proc/getFilesList(list/filelist)
+	for(var/file in filelist)
+		src << browse_rsc(file)
+
 /client/proc/browse_files(root="data/logs/", max_iterations=10, list/valid_extensions=list(".txt",".log",".htm"))
 	var/path = root
 

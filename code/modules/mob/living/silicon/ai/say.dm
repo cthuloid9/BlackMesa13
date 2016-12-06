@@ -55,7 +55,7 @@
 		src << "No holopad connected."
 	return
 
-
+/*
 // Make sure that the code compiles with AI_VOX undefined
 #ifdef AI_VOX
 
@@ -167,3 +167,4 @@ var/const/VOX_DELAY = 600
 	return 0
 
 #endif
+*/

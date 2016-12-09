@@ -18,6 +18,8 @@
 	attack_verb = list("struck", "hit", "bashed")
 
 	var/fire_sound = "gunshot"
+	var/sound_varies = 1                //whether or not the pitch of the firing sound varies
+	var/fire_sound_suppressed = null    //the sound the gun makes when suppressed. leave as null for no unique sound.
 	var/suppressed = 0					//whether or not a message is displayed when fired
 	var/can_suppress = 0
 	var/can_unsuppress = 1
@@ -110,9 +112,12 @@
 		shake_camera(user, recoil + 1, recoil)
 
 	if(suppressed)
-		playsound(user, fire_sound, 10, 1)
+		if(fire_sound_suppressed == null)
+			playsound(user, fire_sound, 10, sound_varies)
+		else
+			playsound(user, fire_sound_suppressed, 10, sound_varies)
 	else
-		playsound(user, fire_sound, 50, 1)
+		playsound(user, fire_sound, 50, sound_varies)
 		if(message)
 			if(pointblank)
 				user.visible_message("<span class='danger'>[user] fires [src] point blank at [pbtarget]!</span>", null, null, COMBAT_MESSAGE_RANGE)

@@ -27,11 +27,28 @@
 /obj/item/weapon/gun/ballistic/automatic/pistol/glock
 	name = "\improper glock"
 	desc = "The standard issue weapon used by the Black Mesa security guards."
-	icon_state = "pistol"
+	icon = 'icons/obj/guns/projectile_bm13.dmi'
+	icon_state = "glock"
 	w_class = 2
 	mag_type = /obj/item/ammo_box/magazine/mglock
 	can_suppress = 0
+	can_unsuppress = 0
+	suppressed = 0
 	fire_sound = 'sound/weapons/Gunshot_glock.ogg'
+	sound_varies = 0
+
+/obj/item/weapon/gun/ballistic/automatic/pistol/glocksuppressed
+	name = "\improper suppressed glock"
+	desc = "A suppressed version of the Glock 17."
+	icon = 'icons/obj/guns/projectile_bm13.dmi'
+	icon_state = "glock"
+	w_class = 2
+	mag_type = /obj/item/ammo_box/magazine/mglock
+	can_suppress = 0
+	can_unsuppress = 0
+	suppressed = 1
+	fire_sound = "silenced_gunshot"
+	sound_varies = 0
 
 /obj/item/weapon/gun/ballistic/automatic/pistol/deagle
 	name = "desert eagle"

@@ -32,6 +32,7 @@
 
 // -=[ 9mm glock mags ]=-
 /obj/item/ammo_box/magazine/mglock
+	icon = 'icons/obj/ammo_bm13.dmi'
 	name = "glock magazine (9mm)"
 	icon_state = "9mmglock-8"
 	ammo_type = /obj/item/ammo_casing/c9mm

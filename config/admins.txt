@@ -12,4 +12,4 @@ Greenpoison = Developer
 AYLMAOm8 = Host
 Akirathesheepthing. = Developer
 crux ansata = Host
-Ms.Flatgub = Developer
+Ms.Flatgub = Game Master

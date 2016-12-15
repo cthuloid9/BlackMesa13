@@ -37,4 +37,4 @@ Game Master		= +EVERYTHING
 
 Host			= +EVERYTHING
 
-Coder			= +DEBUG +VAREDIT +SERVER +SPAWN
+Developer			= +DEBUG +VAREDIT +SERVER +SPAWN +REJUV

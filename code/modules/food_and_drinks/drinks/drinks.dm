@@ -254,7 +254,29 @@
 		name = "small carton"
 		desc = "A small carton, intended for holding drinks."
 
+/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/orangejuicebox
+	name = "orange juice box"
+	desc = "A great source of vitamins. Stay healthy!"
+	icon_state = "juicebox"
+	list_reagents = list("orangejuice" = 15)
 
+/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/applejuicebox
+	name = "apple juice box"
+	desc = "Tasty apple juice in a fun little container. Stay healthy!"
+	icon_state = "orangebox"
+	list_reagents = list("applejuice" = 15)
+
+/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/grapejuicebox
+	name = "grape juice box"
+	desc = "Tasty grape juice in a fun little container. Stay healthy!"
+	icon_state = "grapebox"
+	list_reagents = list("grapejuice" = 15)
+
+/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/chocmilkbox
+	name = "carton of chocolate milk"
+	desc = "A small carton of chocolate milk. Delicious!"
+	icon_state = "chocolatebox"
+	list_reagents = list("chocolate_milk" = 15)
 
 //////////////////////////drinkingglass and shaker//
 //Note by Darem: This code handles the mixing of drinks. New drinks go in three places: In Chemistry-Reagents.dm (for the drink

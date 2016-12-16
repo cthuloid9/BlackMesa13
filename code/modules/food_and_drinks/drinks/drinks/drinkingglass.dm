@@ -508,6 +508,10 @@
 				icon_state = "triplecitrus" //needs own sprite mine are trash
 				name = "glass of triple citrus"
 				desc = "A mixture of citrus juices. Tangy, yet smooth."
+			if("eggnog")
+				icon_state = "glass_yellow"
+				name = "Eggnog"
+				desc = "For enjoying the most wonderful time of the year."
 			else
 				icon_state ="glass_brown"
 				var/image/I = image(icon, "glassoverlay")

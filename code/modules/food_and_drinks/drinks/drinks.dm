@@ -240,13 +240,17 @@
 			if("grapejuice")
 				icon_state = "grapebox"
 				name = "grape juice box"
-				desc = "Tastey grape juice in a fun little container. Non-alcoholic!"
+				desc = "Tasty grape juice in a fun little container. Non-alcoholic!"
 			if("chocolate_milk")
 				icon_state = "chocolatebox"
 				name = "carton of chocolate milk"
 				desc = "Milk for cool kids!"
+			if("eggnog")
+				icon_state = "nog2"
+				name = "carton of eggnog"
+				desc = "For enjoying the most wonderful time of the year."
 	else
-		icon_state = "juicebox"
+		//icon_state = "juicebox" If a container contains milk, and then you drink the milk, why would it turn back to a juice container?
 		name = "small carton"
 		desc = "A small carton, intended for holding drinks."
 

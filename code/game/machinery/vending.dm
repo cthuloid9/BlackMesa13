@@ -656,6 +656,13 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	vend_delay = 0
 */
 
+
+
+
+
+
+
+
 //
 // -=[ BLACK MESA VENDING MACHINES ]=-
 //
@@ -697,12 +704,10 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	icon = 'icons/obj/vending_bm13.dmi'
 	icon_state = "enjoy"
 	vend_delay = 15
-	//Taken from 'cola' vender. I'd like to replace this things like fruit juice and possile a fake "fiji" water.
-	products = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_mountain_wind = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/starkist = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_up = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/lemon_lime = 10)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/thirteenloko = 6)
+	//Unfinished list, requires more things and possile a fake "fiji" water.
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/orangejuicebox = 8,/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/applejuicebox = 8,
+	/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/grapejuicebox = 8,/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/chocmilkbox = 8)
+	//contraband = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/thirteenloko = 6)
 
 //Snack vendor [WOOD]
 /obj/machinery/vending/snackvendor
@@ -715,6 +720,17 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 6)
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6)
 	refill_canister = /obj/item/weapon/vending_refill/snack
+
+
+
+
+
+
+
+
+
+
+
 
 
 

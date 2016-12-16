@@ -844,6 +844,14 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	boozepwr = 0 //custom drunk effect
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 
+/datum/reagent/consumable/ethanol/eggnog
+	name = "Eggnog"
+	id = "eggnog"
+	description = "For enjoying the most wonderful time of the year."
+	color = "#fcfdc6" // rgb: 252, 253, 198
+	nutriment_factor = 2 * REAGENTS_METABOLISM
+	boozepwr = 1
+
 /datum/reagent/consumable/ethanol/hippies_delight/on_mob_life(mob/living/M)
 	if (!M.slurring)
 		M.slurring = 1

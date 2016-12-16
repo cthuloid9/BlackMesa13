@@ -219,42 +219,76 @@
 /obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton
 	name = "small carton"
 	desc = "A small carton, intended for holding drinks."
-	icon_state = "juicebox"
+	icon_state = "plainmilkbox"
 	volume = 15 //I figure if you have to craft these it should at least be slightly better than something you can get for free from a watercooler
+	var typelock = 0 //whether or not if the carton should change when the reagent changes
 
+
+//Used to turn plain cartons into specific cartons once filled with their first liquid
 /obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/on_reagent_change()
+	if(typelock) //If we're already set, don't update at all
+		return
+
 	if (reagents.reagent_list.len)
 		switch(reagents.get_master_reagent_id())
 			if("orangejuice")
 				icon_state = "orangebox"
 				name = "orange juice box"
 				desc = "A great source of vitamins. Stay healthy!"
+				typelock = 1
 			if("milk")
 				icon_state = "milkbox"
 				name = "carton of milk"
 				desc = "An excellent source of calcium for growing space explorers."
+				typelock = 1
 			if("applejuice")
 				icon_state = "juicebox"
 				name = "apple juice box"
 				desc = "Sweet apple juice. Don't be late for school!"
+				typelock = 1
 			if("grapejuice")
 				icon_state = "grapebox"
 				name = "grape juice box"
 				desc = "Tasty grape juice in a fun little container. Non-alcoholic!"
+				typelock = 1
 			if("chocolate_milk")
 				icon_state = "chocolatebox"
 				name = "carton of chocolate milk"
 				desc = "Milk for cool kids!"
+				typelock = 1
 			if("eggnog")
 				icon_state = "nog2"
 				name = "carton of eggnog"
 				desc = "For enjoying the most wonderful time of the year."
-	else
-		//icon_state = "juicebox" If a container contains milk, and then you drink the milk, why would it turn back to a juice container?
-		name = "small carton"
-		desc = "A small carton, intended for holding drinks."
+				typelock = 1
 
+/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/orangejuicebox
+	name = "orange juice box"
+	desc = "A great source of vitamins. Stay healthy!"
+	icon_state = "orangebox"
+	list_reagents = list("orangejuice" = 15)
+	typelock = 1
 
+/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/applejuicebox
+	name = "apple juice box"
+	desc = "Tasty apple juice in a fun little container. Stay healthy!"
+	icon_state = "juicebox"
+	list_reagents = list("applejuice" = 15)
+	typelock = 1
+
+/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/grapejuicebox
+	name = "grape juice box"
+	desc = "Tasty grape juice in a fun little container. Stay healthy!"
+	icon_state = "grapebox"
+	list_reagents = list("grapejuice" = 15)
+	typelock = 1
+
+/obj/item/weapon/reagent_containers/food/drinks/sillycup/smallcarton/chocmilkbox
+	name = "carton of chocolate milk"
+	desc = "A small carton of chocolate milk. Delicious!"
+	icon_state = "chocolatebox"
+	list_reagents = list("chocolate_milk" = 15)
+	typelock = 1
 
 //////////////////////////drinkingglass and shaker//
 //Note by Darem: This code handles the mixing of drinks. New drinks go in three places: In Chemistry-Reagents.dm (for the drink

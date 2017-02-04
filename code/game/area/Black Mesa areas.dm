@@ -95,3 +95,11 @@ area/blackmesa
 /area/blackmesa/sector_c/elevator_exit
 	name = "\improper Bathroom"
 	icon_state = "elevator-exit-c"
+
+	//////////
+	//DESERT//
+	//////////
+
+/area/blackmesa/desert/desert
+	name = "\improper Desert"
+	icon_state = "desert"

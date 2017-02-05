@@ -8,6 +8,7 @@
 	var/securityCrimeCounter = 0
 	//This list tracks characters spawned in the world and cannot be modified in-game. Currently referenced by respawn_character().
 	var/locked[] = list()
+	var/retinalaccess[] = list()
 
 /datum/data
 	var/name = "data"
@@ -260,6 +261,14 @@ var/record_id_num = 1001
 		L.fields["image"]		= image
 		L.fields["reference"]	= H
 		locked += L
+
+		//Retinal Access Record
+		var/datum/data/record/A = new()
+		A.fields["id"]          = id
+		A.fields["name"]        = H.real_name
+		A.fields["access"]      = list()
+		A.fields["b_dna"]       = H.dna.unique_enzymes
+		retinalaccess += A
 	return
 
 /datum/datacore/proc/get_id_photo(mob/living/carbon/human/H)

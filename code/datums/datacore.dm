@@ -266,7 +266,11 @@ var/record_id_num = 1001
 		var/datum/data/record/A = new()
 		A.fields["id"]          = id
 		A.fields["name"]        = H.real_name
-		A.fields["access"]      = list()
+		if(H.job)
+			var/datum/job/J = SSjob.GetJob(H.job)
+			A.fields["access"]      = J.get_access()
+		else
+			A.fields["access"] = list()
 		A.fields["b_dna"]       = H.dna.unique_enzymes
 		retinalaccess += A
 	return

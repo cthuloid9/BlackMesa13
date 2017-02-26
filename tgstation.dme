@@ -534,6 +534,7 @@
 #include "code\game\machinery\computer\operator_comms_console.dm"
 #include "code\game\machinery\computer\pod.dm"
 #include "code\game\machinery\computer\prisoner.dm"
+#include "code\game\machinery\computer\retinal_access_console.dm"
 #include "code\game\machinery\computer\robot.dm"
 #include "code\game\machinery\computer\security.dm"
 #include "code\game\machinery\computer\station_alert.dm"

@@ -1,6 +1,6 @@
 /obj/machinery/computer/retinalaccess_console
-	name = "security records console"
-	desc = "Used to view and edit personnel's security records"
+	name = "retinal acccess console"
+	desc = "Used to manage personnel's retinal security access profile."
 	icon_screen = "security"
 	icon_keyboard = "security_key"
 	req_one_access = list(access_security, access_forensics_lockers)
@@ -36,7 +36,7 @@
 		return ..()
 
 //Someone needs to break down the dat += into chunks instead of long ass lines.
-/obj/machinery/computer/secure_data/attack_hand(mob/user)
+/obj/machinery/computer/retinalaccess_console/attack_hand(mob/user)
 	if(..())
 		return
 	if(src.z > 6)
@@ -122,10 +122,6 @@
 </tr>"}
 					if(!isnull(data_core.general))
 						for(var/datum/data/record/R in sortRecord(data_core.general, sortBy, order))
-							var/crimstat = ""
-							for(var/datum/data/record/E in data_core.security)
-								if((E.fields["name"] == R.fields["name"]) && (E.fields["id"] == R.fields["id"]))
-									crimstat = E.fields["criminal"]
 							var/background = "'background-color:#4F7529;'"
 
 
@@ -173,15 +169,12 @@
 					if((istype(active2, /datum/data/record) && data_core.retinalaccess.Find(active2))) //ACCESS RECORD
 						var/header = ""
 
-						var/target_name = active2.fields["name"]
-						var/target_owner = target_name //FIX THIS
-						var/target_rank = active1.fields["rank"]
+						//var/target_name = active2.fields["name"]
+						//var/target_owner = target_name //FIX THIS
+						var/target_rank = active2.fields["rank"]
 
-						var/scan_name
-						if(scan)
-							scan_name = html_encode(scan.name)
-						else
-							scan_name = "--------"
+
+
 
 
 						header += "<hr>"
@@ -221,10 +214,10 @@
 						carddesc += "<form name='cardcomp' action='?src=\ref[src]' method='get'>"
 						carddesc += "<input type='hidden' name='src' value='\ref[src]'>"
 						carddesc += "<input type='hidden' name='choice' value='reg'>"
-						carddesc += "<b>registered name:</b> <input type='text' id='namefield' name='reg' value='[target_name]' style='width:250px; background-color:white;' onchange='markRed()'>"
-						carddesc += "<input type='submit' value='Rename' onclick='markGreen()'>"
-						carddesc += "</form>"
-						carddesc += "<b>Assignment:</b> "
+						//carddesc += "<b>registered name:</b> <input type='text' id='namefield' name='reg' value='[target_name]' style='width:250px; background-color:white;' onchange='markRed()'>"
+						//carddesc += "<input type='submit' value='Rename' onclick='markGreen()'>"
+						//carddesc += "</form>"
+						//carddesc += "<b>Assignment: [target_rank]</b> "
 
 						jobs += "<span id='alljobsslot'><a href='#' onclick='showAll()'>[target_rank]</a></span>" //CHECK THIS
 
@@ -236,16 +229,16 @@
 						accesses += "<table style='width:100%'>"
 						accesses += "<tr>"
 						for(var/i = 1; i <= 7; i++)
-							if(authenticated == 1 && !(i in region_access))
+							if(authenticated == 1) //&& !(i in region_access))
 								continue
 							accesses += "<td style='width:14%'><b>[get_region_accesses_name(i)]:</b></td>"
 						accesses += "</tr><tr>"
 						for(var/i = 1; i <= 7; i++)
-							if(authenticated == 1 && !(i in region_access))
+							if(authenticated == 1 )//&& !(i in region_access))
 								continue
 							accesses += "<td style='width:14%' valign='top'>"
 							for(var/A in get_region_accesses(i))
-								if(A in modify.access)
+								if(A in active2.fields["access"])
 									accesses += "<a href='?src=\ref[src];choice=access;access_target=[A];allowed=0'><font color=\"red\">[replacetext(get_access_desc(A), " ", "&nbsp")]</font></a> "
 								else
 									accesses += "<a href='?src=\ref[src];choice=access;access_target=[A];allowed=1'>[replacetext(get_access_desc(A), " ", "&nbsp")]</a> "
@@ -257,8 +250,7 @@
 
 						dat += "<tt>[header][body]<hr><br></tt>"
 
-						var/counter = 1
-					dat += text("<A href='?src=\ref[];choice=Delete Record (ALL)'>Delete Record (ALL)</A><br><A href='?src=\ref[];choice=Print Record'>Print Record</A><BR><A href='?src=\ref[];choice=Print Poster'>Print Wanted Poster</A><BR><A href='?src=\ref[];choice=Return'>Back</A><BR>", src, src, src, src)
+					dat += "<A href='?src=\ref[src];choice=Return'>Back</A><BR>"
 				else
 		else
 			dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
@@ -273,7 +265,7 @@
 /*Revised /N
 I can't be bothered to look more of the actual code outside of switch but that probably needs revising too.
 What a mess.*/
-/obj/machinery/computer/secure_data/Topic(href, href_list)
+/obj/machinery/computer/retinalaccess_console/Topic(href, href_list)
 	. = ..()
 	if(.)
 		return .
@@ -359,14 +351,14 @@ What a mess.*/
 				if(!( data_core.general.Find(R) ))
 					temp = "Record Not Found!"
 				else
-					for(var/datum/data/record/E in data_core.security)
+					for(var/datum/data/record/E in data_core.retinalaccess)
 						if((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
 							S = E
 					active1 = R
 					active2 = S
 					screen = 3
 
-
+/*
 			if("Print Record")
 				if(!( printing ))
 					printing = 1
@@ -428,78 +420,21 @@ What a mess.*/
 						P.info += "<B>Security Record Lost!</B><BR>"
 						P.name = text("SR-[] '[]'", data_core.securityPrintCount, "Record Lost")
 					P.info += "</TT>"
-					printing = null
-			if("Print Poster")
-				if(!( printing ))
-					var/wanted_name = stripped_input(usr, "Please enter an alias for the criminal:", "Print Wanted Poster", active1.fields["name"])
-					if(wanted_name)
-						var/default_description = "A poster declaring [wanted_name] to be a dangerous individual, wanted by Nanotrasen. Report any sightings to security immediately."
-						var/list/major_crimes = active2.fields["ma_crim"]
-						var/list/minor_crimes = active2.fields["mi_crim"]
-						if(major_crimes.len + minor_crimes.len)
-							default_description += "\n[wanted_name] is wanted for the following crimes:\n"
-						if(minor_crimes.len)
-							default_description += "\nMinor Crimes:"
-							for(var/datum/data/crime/c in active2.fields["mi_crim"])
-								default_description += "\n[c.crimeName]\n"
-								default_description += "[c.crimeDetails]\n"
-						if(major_crimes.len)
-							default_description += "\nMajor Crimes:"
-							for(var/datum/data/crime/c in active2.fields["ma_crim"])
-								default_description += "\n[c.crimeName]\n"
-								default_description += "[c.crimeDetails]\n"
+					printing = null*/
 
-						var/info = stripped_multiline_input(usr, "Please input a description for the poster:", "Print Wanted Poster", default_description, null)
-						if(info)
-							playsound(loc, 'sound/items/poster_being_created.ogg', 100, 1)
-							printing = 1
-							sleep(30)
-							if((istype(active1, /datum/data/record) && data_core.general.Find(active1)))//make sure the record still exists.
-								var/obj/item/weapon/photo/photo = active1.fields["photo_front"]
-								new /obj/item/weapon/poster/legit/wanted(src.loc, photo.img, wanted_name, info)
-							printing = 0
-
-//RECORD DELETE
-			if("Delete All Records")
-				temp = ""
-				temp += "Are you sure you wish to delete all Security records?<br>"
-				temp += "<a href='?src=\ref[src];choice=Purge All Records'>Yes</a><br>"
-				temp += "<a href='?src=\ref[src];choice=Clear Screen'>No</a>"
-
-			if("Purge All Records")
-				investigate_log("[usr.name] ([usr.key]) has purged all the security records.", "records")
-				for(var/datum/data/record/R in data_core.security)
-					qdel(R)
-				data_core.security.Cut()
-				temp = "All Security records deleted."
 
 			if("Add Entry")
 				if(!( istype(active2, /datum/data/record) ))
 					return
 				var/a2 = active2
 				var/t1 = stripped_multiline_input("Add Comment:", "Secure. records", null, null)
-				if(!canUseSecurityRecordsConsole(usr, t1, null, a2))
+				if(!canUseRetinalAccessConsole(usr, t1, null, a2))
 					return
 				var/counter = 1
 				while(active2.fields[text("com_[]", counter)])
 					counter++
 				active2.fields[text("com_[]", counter)] = text("Made by [] ([]) on [] [], []<BR>[]", src.authenticated, src.rank, worldtime2text(), time2text(world.realtime, "MMM DD"), year_integer+540, t1,)
 
-			if("Delete Record (ALL)")
-				if(active1)
-					temp = "<h5>Are you sure you wish to delete the record (ALL)?</h5>"
-					temp += "<a href='?src=\ref[src];choice=Delete Record (ALL) Execute'>Yes</a><br>"
-					temp += "<a href='?src=\ref[src];choice=Clear Screen'>No</a>"
-
-			if("Delete Record (Security)")
-				if(active2)
-					temp = "<h5>Are you sure you wish to delete the record (Security Portion Only)?</h5>"
-					temp += "<a href='?src=\ref[src];choice=Delete Record (Security) Execute'>Yes</a><br>"
-					temp += "<a href='?src=\ref[src];choice=Clear Screen'>No</a>"
-
-			if("Delete Entry")
-				if((istype(active2, /datum/data/record) && active2.fields[text("com_[]", href_list["del_c"])]))
-					active2.fields[text("com_[]", href_list["del_c"])] = "<B>Deleted</B>"
 //RECORD CREATE
 			if("New Record (Security)")
 				if((istype(active1, /datum/data/record) && !( istype(active2, /datum/data/record) )))
@@ -562,18 +497,26 @@ What a mess.*/
 				M.fields["notes"]		= "No notes."
 				data_core.medical += M
 
+				//Retinal Access Record
+				var/datum/data/record/A = new/datum/data/record()
+				A.fields["id"]          = active1.fields["id"]
+				A.fields["name"]        = active1.fields["name"]
+				A.fields["access"]      = list()
+				A.fields["b_dna"]       = "?????"
+				data_core.retinalaccess += A
+
 
 
 //FIELD FUNCTIONS
 			if("Edit Field")
 				var/a1 = active1
-				var/a2 = active2
+				//var/a2 = active2
 
 				switch(href_list["field"])
 					if("name")
 						if(istype(active1, /datum/data/record) || istype(active2, /datum/data/record))
 							var/t1 = copytext(sanitize(input("Please input name:", "Secure. records", active1.fields["name"], null)  as text),1,MAX_MESSAGE_LEN)
-							if(!canUseSecurityRecordsConsole(usr, t1, a1))
+							if(!canUseRetinalAccessConsole(usr, t1, a1))
 								return
 							if(istype(active1, /datum/data/record))
 								active1.fields["name"] = t1
@@ -582,36 +525,12 @@ What a mess.*/
 					if("id")
 						if(istype(active2,/datum/data/record) || istype(active1,/datum/data/record))
 							var/t1 = stripped_input(usr, "Please input id:", "Secure. records", active1.fields["id"], null)
-							if(!canUseSecurityRecordsConsole(usr, t1, a1))
+							if(!canUseRetinalAccessConsole(usr, t1, a1))
 								return
 							if(istype(active1,/datum/data/record))
 								active1.fields["id"] = t1
 							if(istype(active2,/datum/data/record))
 								active2.fields["id"] = t1
-					if("fingerprint")
-						if(istype(active1, /datum/data/record))
-							var/t1 = stripped_input(usr, "Please input fingerprint hash:", "Secure. records", active1.fields["fingerprint"], null)
-							if(!canUseSecurityRecordsConsole(usr, t1, a1))
-								return
-							active1.fields["fingerprint"] = t1
-					if("sex")
-						if(istype(active1, /datum/data/record))
-							if(active1.fields["sex"] == "Male")
-								active1.fields["sex"] = "Female"
-							else
-								active1.fields["sex"] = "Male"
-					if("age")
-						if(istype(active1, /datum/data/record))
-							var/t1 = input("Please input age:", "Secure. records", active1.fields["age"], null) as num
-							if(!canUseSecurityRecordsConsole(usr, "age", a1))
-								return
-							active1.fields["age"] = t1
-					if("species")
-						if(istype(active1, /datum/data/record))
-							var/t1 = input("Select a species", "Species Selection") as null|anything in roundstart_species
-							if(!canUseSecurityRecordsConsole(usr, t1, a1))
-								return
-							active1.fields["species"] = t1
 					if("show_photo_front")
 						if(active1.fields["photo_front"])
 							if(istype(active1.fields["photo_front"], /obj/item/weapon/photo))
@@ -632,119 +551,48 @@ What a mess.*/
 						if(photo)
 							qdel(active1.fields["photo_side"])
 							active1.fields["photo_side"] = photo
-					if("mi_crim_add")
-						if(istype(active1, /datum/data/record))
-							var/t1 = stripped_input(usr, "Please input minor crime names:", "Secure. records", "", null)
-							var/t2 = stripped_multiline_input(usr, "Please input minor crime details:", "Secure. records", "", null)
-							if(!canUseSecurityRecordsConsole(usr, t1, null, a2))
-								return
-							var/crime = data_core.createCrimeEntry(t1, t2, authenticated, worldtime2text())
-							data_core.addMinorCrime(active1.fields["id"], crime)
-					if("mi_crim_delete")
-						if(istype(active1, /datum/data/record))
-							if(href_list["cdataid"])
-								if(!canUseSecurityRecordsConsole(usr, "delete", null, a2))
+					if("access")
+						if(href_list["allowed"])
+							if(authenticated)
+								var/access_type = text2num(href_list["access_target"])
+								var/access_allowed = text2num(href_list["allowed"])
+								if(access_type in (istype(src,/obj/machinery/computer/card/centcom)?get_all_centcom_access() : get_all_accesses()))
+									active2.fields["access"] -= access_type
+									if(access_allowed == 1)
+										active2.fields["access"] += access_type
+									playsound(src, "terminal_type", 50, 0)
+					if ("assign")
+						if (authenticated == 2)
+							var/t1 = href_list["assign_target"]
+							if(t1 == "Custom")
+								var/newJob = reject_bad_text(input("Enter a custom job assignment.", "Assignment", active2.fields["rank"]), MAX_NAME_LEN)
+								if(newJob)
+									t1 = newJob
+
+							else if(t1 == "Unassigned")
+								active2.fields["access"] -= get_all_accesses()
+
+							else
+								var/datum/job/jobdatum
+								for(var/jobtype in typesof(/datum/job))
+									var/datum/job/J = new jobtype
+									if(ckey(J.title) == ckey(t1))
+										jobdatum = J
+										break
+								if(!jobdatum)
+									usr << "<span class='error'>No log exists for this job.</span>"
 									return
-								data_core.removeMinorCrime(active1.fields["id"], href_list["cdataid"])
-					if("ma_crim_add")
-						if(istype(active1, /datum/data/record))
-							var/t1 = stripped_input(usr, "Please input major crime names:", "Secure. records", "", null)
-							var/t2 = stripped_multiline_input(usr, "Please input major crime details:", "Secure. records", "", null)
-							if(!canUseSecurityRecordsConsole(usr, t1, null, a2))
-								return
-							var/crime = data_core.createCrimeEntry(t1, t2, authenticated, worldtime2text())
-							data_core.addMajorCrime(active1.fields["id"], crime)
-					if("ma_crim_delete")
-						if(istype(active1, /datum/data/record))
-							if(href_list["cdataid"])
-								if(!canUseSecurityRecordsConsole(usr, "delete", null, a2))
-									return
-								data_core.removeMajorCrime(active1.fields["id"], href_list["cdataid"])
-					if("notes")
-						if(istype(active2, /datum/data/record))
-							var/t1 = stripped_input(usr, "Please summarize notes:", "Secure. records", active2.fields["notes"], null)
-							if(!canUseSecurityRecordsConsole(usr, t1, null, a2))
-								return
-							active2.fields["notes"] = t1
-					if("criminal")
-						if(istype(active2, /datum/data/record))
-							temp = "<h5>Criminal Status:</h5>"
-							temp += "<ul>"
-							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=none'>None</a></li>"
-							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=arrest'>*Arrest*</a></li>"
-							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=incarcerated'>Incarcerated</a></li>"
-							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=parolled'>Parolled</a></li>"
-							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=released'>Discharged</a></li>"
-							temp += "</ul>"
-					if("rank")
-						var/list/L = list( "Head of Personnel", "Captain", "AI", "Central Command" )
-						//This was so silly before the change. Now it actually works without beating your head against the keyboard. /N
-						if((istype(active1, /datum/data/record) && L.Find(rank)))
-							temp = "<h5>Rank:</h5>"
-							temp += "<ul>"
-							for(var/rank in get_all_jobs())
-								temp += "<li><a href='?src=\ref[src];choice=Change Rank;rank=[rank]'>[rank]</a></li>"
-							temp += "</ul>"
-						else
-							alert(usr, "You do not have the required rank to do this!")
-//TEMPORARY MENU FUNCTIONS
-			else//To properly clear as per clear screen.
-				temp=null
-				switch(href_list["choice"])
-					if("Change Rank")
-						if(active1)
-							active1.fields["rank"] = href_list["rank"]
-							if(href_list["rank"] in get_all_jobs())
-								active1.fields["real_rank"] = href_list["real_rank"]
 
-					if("Change Criminal Status")
-						if(active2)
-							var/old_field = active2.fields["criminal"]
-							switch(href_list["criminal2"])
-								if("none")
-									active2.fields["criminal"] = "None"
-								if("arrest")
-									active2.fields["criminal"] = "*Arrest*"
-								if("incarcerated")
-									active2.fields["criminal"] = "Incarcerated"
-								if("parolled")
-									active2.fields["criminal"] = "Parolled"
-								if("released")
-									active2.fields["criminal"] = "Discharged"
-							investigate_log("[active1.fields["name"]] has been set from [old_field] to [active2.fields["criminal"]] by [usr.name] ([usr.key]).", "records")
-							for(var/mob/living/carbon/human/H in mob_list) //thanks for forcing me to do this, whoever wrote this shitty records system
-								H.sec_hud_set_security_status()
-					if("Delete Record (Security) Execute")
-						investigate_log("[usr.name] ([usr.key]) has deleted the security records for [active1.fields["name"]].", "records")
-						if(active2)
-							data_core.security -= active2
-							qdel(active2)
-							active2 = null
-
-					if("Delete Record (ALL) Execute")
-						if(active1)
-							investigate_log("[usr.name] ([usr.key]) has deleted all records for [active1.fields["name"]].", "records")
-							for(var/datum/data/record/R in data_core.medical)
-								if((R.fields["name"] == active1.fields["name"] || R.fields["id"] == active1.fields["id"]))
-									data_core.medical -= R
-									qdel(R)
-									break
-							data_core.general -= active1
-							qdel(active1)
-							active1 = null
-
-						if(active2)
-							data_core.security -= active2
-							qdel(active2)
-							active2 = null
-					else
-						temp = "This function does not appear to be working at the moment. Our apologies."
+								active2.fields["access"] =  jobdatum.get_access()
+							if (active2.fields["rank"])
+								active2.fields["rank"] = t1
+								playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, 0)
 
 	add_fingerprint(usr)
 	updateUsrDialog()
 	return
 
-/obj/machinery/computer/secure_data/proc/get_photo(mob/user)
+/obj/machinery/computer/retinalaccess_console/proc/get_photo(mob/user)
 	var/obj/item/weapon/photo/P = null
 	if(issilicon(user))
 		var/mob/living/silicon/tempAI = user
@@ -756,7 +604,7 @@ What a mess.*/
 		P = user.get_active_held_item()
 	return P
 
-/obj/machinery/computer/secure_data/emp_act(severity)
+/obj/machinery/computer/retinalaccess_console/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
 		..(severity)
 		return
@@ -793,7 +641,7 @@ What a mess.*/
 
 	..(severity)
 
-/obj/machinery/computer/secure_data/proc/canUseSecurityRecordsConsole(mob/user, message1 = 0, record1, record2)
+/obj/machinery/computer/retinalaccess_console/proc/canUseRetinalAccessConsole(mob/user, message1 = 0, record1, record2)
 	if(user)
 		if(authenticated)
 			if(user.canUseTopic(src))

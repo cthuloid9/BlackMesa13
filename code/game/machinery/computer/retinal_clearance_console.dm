@@ -1,6 +1,6 @@
-/obj/machinery/computer/retinalaccess_console
-	name = "retinal acccess console"
-	desc = "Used to manage personnel's retinal access profile."
+/obj/machinery/computer/retinalclearance_console
+	name = "retinal clearance console"
+	desc = "Used to manage Black Mesa personnel's retinal clearance profiles."
 	icon_screen = "retinal"
 	icon_keyboard = "retinal_key"
 	req_one_access = list(access_security, access_forensics_lockers)
@@ -22,7 +22,7 @@
 	var/order = 1 // -1 = Descending - 1 = Ascending
 
 
-/obj/machinery/computer/retinalaccess_console/attackby(obj/item/O, mob/user, params)
+/obj/machinery/computer/retinalclearance_console/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/weapon/card/id))
 		if(!scan)
 			if(!user.drop_item())
@@ -36,7 +36,7 @@
 		return ..()
 
 //Someone needs to break down the dat += into chunks instead of long ass lines.
-/obj/machinery/computer/retinalaccess_console/attack_hand(mob/user)
+/obj/machinery/computer/retinalclearance_console/attack_hand(mob/user)
 	if(..())
 		return
 	if(src.z > 6)
@@ -256,7 +256,7 @@
 			dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
 	//user << browse(text("<HEAD><TITLE>Security Records</TITLE></HEAD><TT>[]</TT>", dat), "window=secure_rec;size=600x400")
 	//onclose(user, "secure_rec")
-	var/datum/browser/popup = new(user, "secure_rec", "Retinal Access Console", 900, 680)
+	var/datum/browser/popup = new(user, "secure_rec", "Retinal Clearance Console", 900, 680)
 	popup.set_content(dat)
 	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
@@ -265,7 +265,7 @@
 /*Revised /N
 I can't be bothered to look more of the actual code outside of switch but that probably needs revising too.
 What a mess.*/
-/obj/machinery/computer/retinalaccess_console/Topic(href, href_list)
+/obj/machinery/computer/retinalclearance_console/Topic(href, href_list)
 	. = ..()
 	if(.)
 		return .
@@ -528,7 +528,7 @@ What a mess.*/
 	updateUsrDialog()
 	return
 
-/obj/machinery/computer/retinalaccess_console/proc/get_photo(mob/user)
+/obj/machinery/computer/retinalclearance_console/proc/get_photo(mob/user)
 	var/obj/item/weapon/photo/P = null
 	if(issilicon(user))
 		var/mob/living/silicon/tempAI = user
@@ -540,7 +540,7 @@ What a mess.*/
 		P = user.get_active_held_item()
 	return P
 
-/obj/machinery/computer/retinalaccess_console/emp_act(severity)
+/obj/machinery/computer/retinalclearance_console/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
 		..(severity)
 		return
@@ -567,7 +567,7 @@ What a mess.*/
 
 	..(severity)
 
-/obj/machinery/computer/retinalaccess_console/proc/canUseRetinalAccessConsole(mob/user, message1 = 0, record1, record2)
+/obj/machinery/computer/retinalclearance_console/proc/canUseRetinalAccessConsole(mob/user, message1 = 0, record1, record2)
 	if(user)
 		if(authenticated)
 			if(user.canUseTopic(src))

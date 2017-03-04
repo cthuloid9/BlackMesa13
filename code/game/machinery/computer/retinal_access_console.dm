@@ -1,8 +1,8 @@
 /obj/machinery/computer/retinalaccess_console
 	name = "retinal acccess console"
-	desc = "Used to manage personnel's retinal security access profile."
-	icon_screen = "security"
-	icon_keyboard = "security_key"
+	desc = "Used to manage personnel's retinal access profile."
+	icon_screen = "retinal"
+	icon_keyboard = "retinal_key"
 	req_one_access = list(access_security, access_forensics_lockers)
 	circuit = /obj/item/weapon/circuitboard/computer/secure_data
 	var/obj/item/weapon/card/id/scan = null
@@ -94,6 +94,7 @@
 					dat += {"
 <p style='text-align:center;'>"}
 					dat += text("<A href='?src=\ref[];choice=New Record (General)'>New Record</A><BR>", src)
+					dat += text("<A href='?src=\ref[];choice=New Record (Access)'>New Retinal Profile</A><BR>", src)
 					//search bar
 					dat += {"
 						<table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable'>
@@ -118,7 +119,6 @@
 <th><A href='?src=\ref[src];choice=Sorting;sort=name'>Name</A></th>
 <th><A href='?src=\ref[src];choice=Sorting;sort=id'>ID</A></th>
 <th><A href='?src=\ref[src];choice=Sorting;sort=rank'>Rank</A></th>
-<th>Criminal Status</th>
 </tr>"}
 					if(!isnull(data_core.general))
 						for(var/datum/data/record/R in sortRecord(data_core.general, sortBy, order))
@@ -169,8 +169,8 @@
 					if((istype(active2, /datum/data/record) && data_core.retinalaccess.Find(active2))) //ACCESS RECORD
 						var/header = ""
 
-						//var/target_name = active2.fields["name"]
-						//var/target_owner = target_name //FIX THIS
+						var/target_name = active2.fields["name"]
+						var/target_owner = target_name
 						var/target_rank = active2.fields["rank"]
 
 
@@ -190,10 +190,10 @@
 
 
 
-						var/carddesc = text("")
+						var/accdesc = text("")
 						var/jobs = text("")
 
-						carddesc += {"<script type="text/javascript">
+						accdesc += {"<script type="text/javascript">
 											function markRed(){
 												var nameField = document.getElementById('namefield');
 												nameField.style.backgroundColor = "#FFDDDD";
@@ -211,13 +211,13 @@
 												allJobsSlot.innerHTML = "<a href='#' onclick='showAll()'>show</a>";
 											}
 										</script>"}
-						carddesc += "<form name='cardcomp' action='?src=\ref[src]' method='get'>"
-						carddesc += "<input type='hidden' name='src' value='\ref[src]'>"
-						carddesc += "<input type='hidden' name='choice' value='reg'>"
-						//carddesc += "<b>registered name:</b> <input type='text' id='namefield' name='reg' value='[target_name]' style='width:250px; background-color:white;' onchange='markRed()'>"
-						//carddesc += "<input type='submit' value='Rename' onclick='markGreen()'>"
-						//carddesc += "</form>"
-						//carddesc += "<b>Assignment: [target_rank]</b> "
+						accdesc += "<form name='cardcomp' action='?src=\ref[src]' method='get'>"
+						accdesc += "<input type='hidden' name='src' value='\ref[src]'>"
+						accdesc += "<input type='hidden' name='choice' value='reg'>"
+						accdesc += "<b>registered name:</b> <input type='text' id='namefield' name='reg' value='[target_name]' style='width:250px; background-color:white;' onchange='markRed()'>"
+						accdesc += "<input type='submit' value='Rename' onclick='markGreen()'>"
+						accdesc += "</form>"
+						accdesc += "<b>Assignment: [target_rank]</b> "
 
 						jobs += "<span id='alljobsslot'><a href='#' onclick='showAll()'>[target_rank]</a></span>" //CHECK THIS
 
@@ -245,7 +245,7 @@
 								accesses += "<br>"
 							accesses += "</td>"
 						accesses += "</tr></table>"
-						body = "[carddesc]<br>[jobs]<br><br>[accesses]" //CHECK THIS
+						body = "[accdesc]<br>[jobs]<br><br>[accesses]" //CHECK THIS
 
 
 						dat += "<tt>[header][body]<hr><br></tt>"
@@ -256,7 +256,7 @@
 			dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
 	//user << browse(text("<HEAD><TITLE>Security Records</TITLE></HEAD><TT>[]</TT>", dat), "window=secure_rec;size=600x400")
 	//onclose(user, "secure_rec")
-	var/datum/browser/popup = new(user, "secure_rec", "Security Records Console", 600, 400)
+	var/datum/browser/popup = new(user, "secure_rec", "Retinal Access Console", 900, 680)
 	popup.set_content(dat)
 	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
@@ -271,7 +271,7 @@ What a mess.*/
 		return .
 	if(!( data_core.general.Find(active1) ))
 		active1 = null
-	if(!( data_core.security.Find(active2) ))
+	if(!( data_core.retinalaccess.Find(active2) ))
 		active2 = null
 	if(usr.contents.Find(src) || (in_range(src, usr) && isturf(loc)) || issilicon(usr) || IsAdminGhost(usr))
 		usr.set_machine(src)
@@ -358,71 +358,6 @@ What a mess.*/
 					active2 = S
 					screen = 3
 
-/*
-			if("Print Record")
-				if(!( printing ))
-					printing = 1
-					data_core.securityPrintCount++
-					playsound(loc, 'sound/items/poster_being_created.ogg', 100, 1)
-					sleep(30)
-					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( loc )
-					P.info = "<CENTER><B>Security Record - (SR-[data_core.securityPrintCount])</B></CENTER><BR>"
-					if((istype(active1, /datum/data/record) && data_core.general.Find(active1)))
-						P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>", active1.fields["name"], active1.fields["id"], active1.fields["sex"], active1.fields["age"])
-						if(config.mutant_races)
-							P.info += "\nSpecies: [active1.fields["species"]]<BR>"
-						P.info += text("\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", active1.fields["fingerprint"], active1.fields["p_stat"], active1.fields["m_stat"])
-					else
-						P.info += "<B>General Record Lost!</B><BR>"
-					if((istype(active2, /datum/data/record) && data_core.security.Find(active2)))
-						P.info += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\nCriminal Status: []", active2.fields["criminal"])
-
-						P.info += "<BR>\n<BR>\nMinor Crimes:<BR>\n"
-						P.info +={"<table style="text-align:center;" border="1" cellspacing="0" width="100%">
-<tr>
-<th>Crime</th>
-<th>Details</th>
-<th>Author</th>
-<th>Time Added</th>
-</tr>"}
-						for(var/datum/data/crime/c in active2.fields["mi_crim"])
-							P.info += "<tr><td>[c.crimeName]</td>"
-							P.info += "<td>[c.crimeDetails]</td>"
-							P.info += "<td>[c.author]</td>"
-							P.info += "<td>[c.time]</td>"
-							P.info += "</tr>"
-						P.info += "</table>"
-
-						P.info += "<BR>\nMajor Crimes: <BR>\n"
-						P.info +={"<table style="text-align:center;" border="1" cellspacing="0" width="100%">
-<tr>
-<th>Crime</th>
-<th>Details</th>
-<th>Author</th>
-<th>Time Added</th>
-</tr>"}
-						for(var/datum/data/crime/c in active2.fields["ma_crim"])
-							P.info += "<tr><td>[c.crimeName]</td>"
-							P.info += "<td>[c.crimeDetails]</td>"
-							P.info += "<td>[c.author]</td>"
-							P.info += "<td>[c.time]</td>"
-							P.info += "</tr>"
-						P.info += "</table>"
-
-
-						P.info += text("<BR>\nImportant Notes:<BR>\n\t[]<BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>", active2.fields["notes"])
-						var/counter = 1
-						while(active2.fields[text("com_[]", counter)])
-							P.info += text("[]<BR>", active2.fields[text("com_[]", counter)])
-							counter++
-						P.name = text("SR-[] '[]'", data_core.securityPrintCount, active1.fields["name"])
-					else
-						P.info += "<B>Security Record Lost!</B><BR>"
-						P.name = text("SR-[] '[]'", data_core.securityPrintCount, "Record Lost")
-					P.info += "</TT>"
-					printing = null*/
-
-
 			if("Add Entry")
 				if(!( istype(active2, /datum/data/record) ))
 					return
@@ -436,18 +371,16 @@ What a mess.*/
 				active2.fields[text("com_[]", counter)] = text("Made by [] ([]) on [] [], []<BR>[]", src.authenticated, src.rank, worldtime2text(), time2text(world.realtime, "MMM DD"), year_integer+540, t1,)
 
 //RECORD CREATE
-			if("New Record (Security)")
+			if("New Record (Access)")
 				if((istype(active1, /datum/data/record) && !( istype(active2, /datum/data/record) )))
-					var/datum/data/record/R = new /datum/data/record()
-					R.fields["name"] = active1.fields["name"]
-					R.fields["id"] = active1.fields["id"]
-					R.name = text("Security Record #[]", R.fields["id"])
-					R.fields["criminal"] = "None"
-					R.fields["mi_crim"] = list()
-					R.fields["ma_crim"] = list()
-					R.fields["notes"] = "No notes."
-					data_core.security += R
-					active2 = R
+					var/datum/data/record/A = new /datum/data/record()
+					A.fields["name"] = active1.fields["name"]
+					A.fields["id"] = active1.fields["id"]
+					A.fields["access"]      = list()
+					A.fields["b_dna"]       = "?????"
+					A.name = text("Retinal Access Record #[]", A.fields["id"])
+					data_core.retinalaccess += A
+					active2 = A
 					screen = 3
 
 			if("New Record (General)")
@@ -505,9 +438,46 @@ What a mess.*/
 				A.fields["b_dna"]       = "?????"
 				data_core.retinalaccess += A
 
+//ACCESS FUNCTIONS
+			if("access")
+				if(href_list["allowed"])
+					if(authenticated)
+						var/access_type = text2num(href_list["access_target"])
+						var/access_allowed = text2num(href_list["allowed"])
+						if(access_type in (get_all_accesses()))
+							active2.fields["access"] -= access_type
+							if(access_allowed == 1)
+								active2.fields["access"] += access_type
+							playsound(src, "terminal_type", 50, 0)
 
+			if ("assign")
+				if (authenticated == 2)
+					var/t1 = href_list["assign_target"]
+					if(t1 == "Custom")
+						var/newJob = reject_bad_text(input("Enter a custom job assignment.", "Assignment", active2.fields["rank"]), MAX_NAME_LEN)
+						if(newJob)
+							t1 = newJob
 
-//FIELD FUNCTIONS
+					else if(t1 == "Unassigned")
+						active2.fields["access"] -= get_all_accesses()
+
+					else
+						var/datum/job/jobdatum
+						for(var/jobtype in typesof(/datum/job))
+							var/datum/job/J = new jobtype
+							if(ckey(J.title) == ckey(t1))
+								jobdatum = J
+								break
+						if(!jobdatum)
+							usr << "<span class='error'>No log exists for this job.</span>"
+							return
+
+						active2.fields["access"] =  jobdatum.get_access()
+					if (active2.fields["rank"])
+						active2.fields["rank"] = t1
+						playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, 0)
+
+//OTHER FIELD FUNCTIONS
 			if("Edit Field")
 				var/a1 = active1
 				//var/a2 = active2
@@ -551,42 +521,8 @@ What a mess.*/
 						if(photo)
 							qdel(active1.fields["photo_side"])
 							active1.fields["photo_side"] = photo
-					if("access")
-						if(href_list["allowed"])
-							if(authenticated)
-								var/access_type = text2num(href_list["access_target"])
-								var/access_allowed = text2num(href_list["allowed"])
-								if(access_type in (istype(src,/obj/machinery/computer/card/centcom)?get_all_centcom_access() : get_all_accesses()))
-									active2.fields["access"] -= access_type
-									if(access_allowed == 1)
-										active2.fields["access"] += access_type
-									playsound(src, "terminal_type", 50, 0)
-					if ("assign")
-						if (authenticated == 2)
-							var/t1 = href_list["assign_target"]
-							if(t1 == "Custom")
-								var/newJob = reject_bad_text(input("Enter a custom job assignment.", "Assignment", active2.fields["rank"]), MAX_NAME_LEN)
-								if(newJob)
-									t1 = newJob
 
-							else if(t1 == "Unassigned")
-								active2.fields["access"] -= get_all_accesses()
 
-							else
-								var/datum/job/jobdatum
-								for(var/jobtype in typesof(/datum/job))
-									var/datum/job/J = new jobtype
-									if(ckey(J.title) == ckey(t1))
-										jobdatum = J
-										break
-								if(!jobdatum)
-									usr << "<span class='error'>No log exists for this job.</span>"
-									return
-
-								active2.fields["access"] =  jobdatum.get_access()
-							if (active2.fields["rank"])
-								active2.fields["rank"] = t1
-								playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, 0)
 
 	add_fingerprint(usr)
 	updateUsrDialog()
@@ -609,30 +545,20 @@ What a mess.*/
 		..(severity)
 		return
 
-	for(var/datum/data/record/R in data_core.security)
+	for(var/datum/data/record/R in data_core.retinalaccess)
 		if(prob(10/severity))
-			switch(rand(1,8))
+			switch(rand(1,3))
 				if(1)
 					if(prob(10))
 						R.fields["name"] = "[pick(lizard_name(MALE),lizard_name(FEMALE))]"
 					else
 						R.fields["name"] = "[pick(pick(first_names_male), pick(first_names_female))] [pick(last_names)]"
 				if(2)
-					R.fields["sex"] = pick("Male", "Female")
+					if(prob(50))
+						R.fields["access"] = list()
 				if(3)
-					R.fields["age"] = rand(5, 85)
-				if(4)
-					R.fields["criminal"] = pick("None", "*Arrest*", "Incarcerated", "Parolled", "Discharged")
-				if(5)
-					R.fields["p_stat"] = pick("*Unconcious*", "Active", "Physically Unfit")
-				if(6)
-					R.fields["m_stat"] = pick("*Insane*", "*Unstable*", "*Watch*", "Stable")
-				if(7)
-					R.fields["species"] = pick(roundstart_species)
-				if(8)
-					var/datum/data/record/G = pick(data_core.general)
-					R.fields["photo_front"] = G.fields["photo_front"]
-					R.fields["photo_side"] = G.fields["photo_side"]
+					if(prob(50))
+						R.fields["b_dna"] = "\[CORRUPTED]"
 			continue
 
 		else if(prob(1))

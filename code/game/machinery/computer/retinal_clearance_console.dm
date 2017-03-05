@@ -93,8 +93,7 @@
 	"}
 					dat += {"
 <p style='text-align:center;'>"}
-					dat += text("<A href='?src=\ref[];choice=New Record (General)'>New Record</A><BR>", src)
-					dat += text("<A href='?src=\ref[];choice=New Record (Access)'>New Retinal Profile</A><BR>", src)
+					dat += text("<A href='?src=\ref[];choice=New Personnel Profile'>New Personnel Profile</A><BR>", src)
 					//search bar
 					dat += {"
 						<table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable'>
@@ -169,9 +168,9 @@
 					if((istype(active2, /datum/data/record) && data_core.retinalaccess.Find(active2))) //ACCESS RECORD
 						var/header = ""
 
-						var/target_name = active2.fields["name"]
-						var/target_owner = target_name
-						var/target_rank = active2.fields["rank"]
+						//var/target_name = active2.fields["name"]
+						//var/target_owner = target_name
+						var/target_rank = active1.fields["rank"]
 
 
 
@@ -214,8 +213,6 @@
 						accdesc += "<form name='cardcomp' action='?src=\ref[src]' method='get'>"
 						accdesc += "<input type='hidden' name='src' value='\ref[src]'>"
 						accdesc += "<input type='hidden' name='choice' value='reg'>"
-						accdesc += "<b>registered name:</b> <input type='text' id='namefield' name='reg' value='[target_name]' style='width:250px; background-color:white;' onchange='markRed()'>"
-						accdesc += "<input type='submit' value='Rename' onclick='markGreen()'>"
 						accdesc += "</form>"
 						accdesc += "<b>Assignment: [target_rank]</b> "
 
@@ -225,16 +222,16 @@
 						var/accesses = ""
 
 
-						accesses += "<div align='center'><b>Access</b></div>"
+						accesses += "<div align='center'><b>Clearance</b></div>"
 						accesses += "<table style='width:100%'>"
 						accesses += "<tr>"
 						for(var/i = 1; i <= 7; i++)
-							if(authenticated == 1) //&& !(i in region_access))
+							if(authenticated == 1)
 								continue
 							accesses += "<td style='width:14%'><b>[get_region_accesses_name(i)]:</b></td>"
 						accesses += "</tr><tr>"
 						for(var/i = 1; i <= 7; i++)
-							if(authenticated == 1 )//&& !(i in region_access))
+							if(authenticated == 1 )
 								continue
 							accesses += "<td style='width:14%' valign='top'>"
 							for(var/A in get_region_accesses(i))
@@ -254,8 +251,6 @@
 				else
 		else
 			dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
-	//user << browse(text("<HEAD><TITLE>Security Records</TITLE></HEAD><TT>[]</TT>", dat), "window=secure_rec;size=600x400")
-	//onclose(user, "secure_rec")
 	var/datum/browser/popup = new(user, "secure_rec", "Retinal Clearance Console", 900, 680)
 	popup.set_content(dat)
 	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
@@ -371,19 +366,7 @@ What a mess.*/
 				active2.fields[text("com_[]", counter)] = text("Made by [] ([]) on [] [], []<BR>[]", src.authenticated, src.rank, worldtime2text(), time2text(world.realtime, "MMM DD"), year_integer+540, t1,)
 
 //RECORD CREATE
-			if("New Record (Access)")
-				if((istype(active1, /datum/data/record) && !( istype(active2, /datum/data/record) )))
-					var/datum/data/record/A = new /datum/data/record()
-					A.fields["name"] = active1.fields["name"]
-					A.fields["id"] = active1.fields["id"]
-					A.fields["access"]      = list()
-					A.fields["b_dna"]       = "?????"
-					A.name = text("Retinal Access Record #[]", A.fields["id"])
-					data_core.retinalaccess += A
-					active2 = A
-					screen = 3
-
-			if("New Record (General)")
+			if("New Personnel Profile")
 				//General Record
 				var/datum/data/record/G = new /datum/data/record()
 				G.fields["name"] = "New Record"
@@ -451,7 +434,7 @@ What a mess.*/
 							playsound(src, "terminal_type", 50, 0)
 
 			if ("assign")
-				if (authenticated == 2)
+				if (authenticated)
 					var/t1 = href_list["assign_target"]
 					if(t1 == "Custom")
 						var/newJob = reject_bad_text(input("Enter a custom job assignment.", "Assignment", active2.fields["rank"]), MAX_NAME_LEN)

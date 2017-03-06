@@ -456,9 +456,10 @@ What a mess.*/
 							return
 
 						active2.fields["access"] =  jobdatum.get_access()
-					if (active2.fields["rank"])
-						active2.fields["rank"] = t1
-						playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, 0)
+
+					active2.fields["rank"] = t1
+					active1.fields["rank"] = t1
+					playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, 0)
 
 //OTHER FIELD FUNCTIONS
 			if("Edit Field")

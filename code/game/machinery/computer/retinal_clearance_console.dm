@@ -3,8 +3,8 @@
 	desc = "Used to manage Black Mesa personnel's retinal clearance profiles."
 	icon_screen = "retinal"
 	icon_keyboard = "retinal_key"
-	req_one_access = list(access_security, access_forensics_lockers)
-	circuit = /obj/item/weapon/circuitboard/computer/secure_data
+	req_one_access = list(access_change_ids, access_security)
+	circuit = /obj/item/weapon/circuitboard/computer/retinalclearance
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
 	var/rank = null
@@ -13,9 +13,6 @@
 	var/datum/data/record/active2 = null
 	var/a_id = null
 	var/temp = null
-	var/printing = null
-	var/can_change_id = 0
-	var/list/Perp
 	var/tempname = null
 	//Sorting Variables
 	var/sortBy = "name"

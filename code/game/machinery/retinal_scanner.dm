@@ -90,6 +90,31 @@
 		else
 			user << "<span class='warning'>You need to open the side panel before you can do that.</span>"
 
+	//Crowbar based interaction
+	else if(istype(W, /obj/item/weapon/crowbar))
+		// -[BROKEN]-
+		if(stat & BROKEN)
+			if(do_after(user, 30, target = src))
+				new /obj/item/stack/sheet/metal(loc)
+				user.visible_message(\
+					"[user.name] salvages [src] using [W]",\
+					"<span class='notice'>You salvage what you can of the retinal scanner.</span>")
+				playsound(src.loc, W.usesound, 50, 1)
+				qdel(src)
+		// -[OPEN]-
+		else if(stat & MAINT)
+			if(do_after(user, 30, target = src))
+				new /obj/item/wallframe/retinal_scanner(loc)
+				user.visible_message(\
+					"[user.name] removes [src] from the wall using [W]",\
+					"<span class='notice'>You detach the retinal scanner from the wall.</span>")
+				user << "<span class='notice'>The clearance board is destroyed in the process</span>"
+				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+				qdel(src)
+		// -[NOT BROKEN OR OPEN]-
+		else
+			user << "<span class='warning'>You need to open the side panel before you can do that.</span>"
+
 	//Assembly based interaction
 	else if(istype(W, /obj/item/device/assembly/))
 		// -[BROKEN OR OPEN]-
@@ -132,7 +157,7 @@
 				user.visible_message(\
 					"[user.name] has inserted the clearance board to [src.name].",\
 					"<span class='notice'>You insert the clearance board and it permenantly locks into place.</span>")
-				playsound(src.loc, 'sound/machines/lock_into_place.ogg', 50, 1)
+				playsound(src.loc, 'sound/machines/click.ogg', 50, 0)
 				qdel(board) //we dont need the card anymore
 
 				clearance = 1 //Thats taken care of
@@ -158,17 +183,31 @@
 	else //OTHER INTERACTIONS
 		return ..()
 
+/obj/machinery/retinal_scanner/proc/scan_success()
+	if(driver)
+		driver.pulsed()
+		use_power(5)
+	playsound(src.loc, 'sound/machines/retinal_scan_pass.ogg', 50, 0)
+
+/obj/machinery/retinal_scanner/proc/scan_failure()
+	use_power(5)
+	playsound(src.loc, 'sound/machines/retinal_scan_denied.ogg', 50, 0)
+	flick("denied", src)
+
+
 /obj/machinery/retinal_scanner/attack_hand(mob/user)
 	if(!user)
 		return
 	if(usr == user && (!issilicon(user)))
 		src.add_fingerprint(user)
-		if(!stat) // -[NOT OPEN, BROKEN OR OFF]-
+		if(!stat && clearance && driver && !scanning) // -[ABSOLUTELY READY]-
 			flick("scan", src)
-			if(do_after(user,20,needhand = 0,target = src)) //takes a second to scan
-				if(driver)
-					driver.pulsed()
-					use_power(5)
+			scanning = 1
+			if(do_after(user,10,needhand = 0,target = src)) //takes a second to scan
+				pick(scan_success(),scan_failure()) //For Testing
+			scanning = 0
+		else if((!clearance || !driver) && !(stat & MAINT)) //Missing pieces but closed
+			user << "<span class='notice'>The device isn't ready for use.</span>"
 		else if(stat & BROKEN) // -[BROKEN]-
 			user << "<span class='warning'>It's too damaged to be used.</span>"
 		else // -[OPEN OR OFF]-
@@ -186,13 +225,13 @@
 		else //Something is missing
 			user << "<span class='warning'>It is displaying an error:</span>"
 			if(!clearance)
-				user << "<span class='warning'>   *NO CLEARANCE RESTRICTIONS SET</span>"
+				user << "<span class='warning'>   *NO CLEARANCE RESTRICTIONS SET!</span>"
 			if(!driver)
-				user << "<span class='warning'>   *NO DOOR CONTROL BOARD</span>"
+				user << "<span class='warning'>   *NO DOOR CONTROL BOARD!</span>"
 	else if(stat & MAINT)
-		user << "It is powered down due to the side panel being open[driver?". It contains a control board":""]."
+		user << "It is powered down due to the side panel being open. [(!clearance || !driver)?"There are components clearly missing.":""]"
 	else if(stat & BROKEN)
-		user << "It is severely damaged and requires repair. The side panel is bent open[driver?" and the control board is accessable.":"."]"
+		user << "It is severely damaged and requires repair. The side panel is bent open."
 	else if(stat & NOPOWER || stat & EMPED)
 		user << "It is lacking power."
 

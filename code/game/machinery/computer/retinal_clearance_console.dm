@@ -139,6 +139,13 @@
 					dat += "<BR><A href='?src=\ref[src];choice=Delete All Records'>Delete All Records</A><BR><BR><A href='?src=\ref[src];choice=Return'>Back</A>"
 				if(3)
 					dat += "<font size='4'><b>Retinal Profile</b></font><br>"
+
+					var active2_present = 0
+
+					if((istype(active2, /datum/data/record) && data_core.retinalaccess.Find(active2))) //ACCESS RECORD
+						active2_present = 1
+
+
 					if(istype(active1, /datum/data/record) && data_core.general.Find(active1)) //GENERAL RECORD
 						if(istype(active1.fields["photo_front"], /obj/item/weapon/photo))
 							var/obj/item/weapon/photo/P1 = active1.fields["photo_front"]
@@ -151,6 +158,9 @@
 						<tr><td>ID:</td><td><A href='?src=\ref[src];choice=Edit Field;field=id'>&nbsp;[active1.fields["id"]]&nbsp;</A></td></tr>
 						<tr><td>Sex:</td><td>&nbsp;[active1.fields["sex"]]&nbsp;</td></tr>
 						<tr><td>Age:</td><td>&nbsp;[active1.fields["age"]]&nbsp;</td></tr>"}
+						if(active2_present)
+							dat += "<tr><td>DNA ID:</td><td><A href='?src=\ref[src];choice=Edit Field;field=b_dna'>&nbsp;[active2.fields["b_dna"]]&nbsp;</A></td></tr>"
+
 						if(config.mutant_races)
 							dat += "<tr><td>Species:</td><td>&nbsp;[active1.fields["species"]]&nbsp;</td></tr>"
 						dat += {"<tr><td>Rank:</td><td>&nbsp;[active1.fields["rank"]]&nbsp;</td></tr>
@@ -162,7 +172,7 @@
 						</td></tr></table></td></tr></table>"}
 					else
 						dat += "<br>General Record Lost!<br>"
-					if((istype(active2, /datum/data/record) && data_core.retinalaccess.Find(active2))) //ACCESS RECORD
+					if(active2_present) //ACCESS RECORD
 						var/header = ""
 
 						//var/target_name = active2.fields["name"]
@@ -482,6 +492,13 @@ What a mess.*/
 								active1.fields["id"] = t1
 							if(istype(active2,/datum/data/record))
 								active2.fields["id"] = t1
+					if("b_dna")
+						if(istype(active2,/datum/data/record) || istype(active1,/datum/data/record))
+							var/t1 = stripped_input(usr, "Please input DNA unique enzymes:", "Secure. records", active2.fields["b_dna"], null)
+							if(!canUseRetinalAccessConsole(usr, t1, a1))
+								return
+							if(istype(active2,/datum/data/record))
+								active2.fields["b_dna"] = t1
 					if("show_photo_front")
 						if(active1.fields["photo_front"])
 							if(istype(active1.fields["photo_front"], /obj/item/weapon/photo))

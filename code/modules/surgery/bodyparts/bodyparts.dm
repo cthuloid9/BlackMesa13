@@ -31,6 +31,8 @@
 	var/mutation_color = ""
 	var/no_update = 0
 
+	var/b_dna = null //The unique_enzymes of the owner if set using assign_bodyparts_dna.
+
 	var/animal_origin = null //for nonhuman bodypart (e.g. monkey)
 	var/dismemberable = 1 //whether it can be dismembered with a weapon.
 

@@ -38,6 +38,65 @@
 		if(req_access.len || req_one_access.len) //If we have any access requirements
 			clearance = 1
 
+// SCAN FUNCTIONS
+/obj/machinery/retinal_scanner/proc/retinal_scan(target)
+	var found = 0 //if we found the user record
+	var targetdna = ""
+	var/datum/data/record/retacc = null
+
+	if(istype(target, /mob/living/carbon)) //Scanning a body
+		var /mob/living/carbon/T = target
+		targetdna = T.dna.unique_enzymes //DNA of the user
+		retacc = null //The retinal access record, if we found one
+		for(var/datum/data/record/RA in data_core.retinalaccess) //For each retinal record, check if it matches our user's dna
+			if((RA.fields["b_dna"] == targetdna))
+				found = 1 //If it does, we found our person
+				retacc = RA
+				break
+
+	if(istype(target,/obj/item/bodypart/head)) //Scanning a head
+		var /obj/item/bodypart/head/T = target
+		if(!T.owner)
+			targetdna = T.b_dna
+			retacc = null //The retinal access record, if we found one
+			for(var/datum/data/record/RA in data_core.retinalaccess) //For each retinal record, check if it matches our head's dna
+				if((RA.fields["b_dna"] == targetdna))
+					found = 1 //If it does, we found our person
+					retacc = RA
+					break
+
+	if(found)
+		//Ripped from modules/jobs/access.dm with minor adjustments
+		var/list/acc = retacc.fields["access"] //Get the access list from the record
+
+		var/list/L = req_access
+		if(!L.len && (!req_one_access || !req_one_access.len)) //no requirements
+			return 1
+
+		for(var/req in req_access)
+			if(!(req in acc)) //doesn't have this access
+				return 0
+		if(req_one_access && req_one_access.len)
+			for(var/req in req_one_access)
+				if(req in acc) //has an access from the single access list
+					return 1
+			return 0
+		return 1
+	else
+		return 0
+
+/obj/machinery/retinal_scanner/proc/scan_success()
+	if(driver)
+		driver.pulsed()
+		use_power(5)
+	playsound(src.loc, 'sound/machines/retinal_scan_pass.ogg', 50, 0)
+
+/obj/machinery/retinal_scanner/proc/scan_failure()
+	use_power(5)
+	playsound(src.loc, 'sound/machines/retinal_scan_denied.ogg', 50, 0)
+	flick("denied", src)
+
+
 // ICON UPDATE
 /obj/machinery/retinal_scanner/update_icon()
 	if(!stat) //No conditions
@@ -54,8 +113,46 @@
 
 // INTERACTION
 /obj/machinery/retinal_scanner/attackby(obj/item/W, mob/user, params)
+	//Scanning with head
+	if(istype(W, /obj/item/bodypart/head))
+		if(!stat && clearance && driver && !scanning) // -[ABSOLUTELY READY]-
+			flick("scan", src)
+			var /obj/item/bodypart/head/H = W
+			if(!H.b_dna) //Dunno how this'd happens, but as a precaution.
+				scan_failure()
+				user << "<span class='notice'>The scanner doesn't recognise you.</span>"
+				return
+
+			scanning = 1 //Scan start
+
+
+			user.visible_message("<span class='warning'>[user.name] holds [target.name] up to the retinal scanner!</span>",\
+									   "<span class='notice'>You hold [target.name] up to retinal scanner.</span>")
+
+			if(do_after(user,10,needhand = 0,target = src)) //takes a second to scan
+
+				if(retinal_scan(H))
+					scan_success()
+				else
+					scan_failure()
+					user << "<span class='warning'>Access Denied</span>"
+			else
+				user << "<span class='notice'>Scan Interupted.</span>"
+
+
+
+			scanning = 0 //Scan finish
+
+		else if((!clearance || !driver) && !(stat & MAINT)) //Missing pieces but closed
+			user << "<span class='notice'>The device isn't ready for use.</span>"
+		else if(stat & BROKEN) // -[BROKEN]-
+			user << "<span class='warning'>It's too damaged to be used.</span>"
+		else // -[OPEN OR OFF]-
+			user << "<span class='notice'>Nothing Happens.</span>"
+
+
 	//Screwdriver based interaction
-	if(istype(W, /obj/item/weapon/screwdriver))
+	else if(istype(W, /obj/item/weapon/screwdriver))
 		// -[BROKEN OPEN]-
 		if(stat & BROKEN)
 			user << "<span class='warning'>The unit is so damaged that the side panel is already bent open.</span>"
@@ -183,16 +280,6 @@
 	else //OTHER INTERACTIONS
 		return ..()
 
-/obj/machinery/retinal_scanner/proc/scan_success()
-	if(driver)
-		driver.pulsed()
-		use_power(5)
-	playsound(src.loc, 'sound/machines/retinal_scan_pass.ogg', 50, 0)
-
-/obj/machinery/retinal_scanner/proc/scan_failure()
-	use_power(5)
-	playsound(src.loc, 'sound/machines/retinal_scan_denied.ogg', 50, 0)
-	flick("denied", src)
 
 
 /obj/machinery/retinal_scanner/attack_hand(mob/user)
@@ -202,16 +289,108 @@
 		src.add_fingerprint(user)
 		if(!stat && clearance && driver && !scanning) // -[ABSOLUTELY READY]-
 			flick("scan", src)
-			scanning = 1
+
+			if(!user.has_dna()) //Dunno how this'd happens, but as a precaution.
+				scan_failure()
+				user << "<span class='notice'>The scanner doesn't recognise you.</span>"
+				return
+
+			scanning = 1 //Scan start
+
 			if(do_after(user,10,needhand = 0,target = src)) //takes a second to scan
-				pick(scan_success(),scan_failure()) //For Testing
-			scanning = 0
+				if(istype(user, /mob/living/carbon))
+					if(retinal_scan(user))
+						scan_success()
+					else
+						scan_failure()
+						user << "<span class='warning'>Access Denied</span>"
+			else
+				user << "<span class='notice'>Scan Interupted.</span>"
+
+			scanning = 0 //Scan finish
+
 		else if((!clearance || !driver) && !(stat & MAINT)) //Missing pieces but closed
 			user << "<span class='notice'>The device isn't ready for use.</span>"
 		else if(stat & BROKEN) // -[BROKEN]-
 			user << "<span class='warning'>It's too damaged to be used.</span>"
 		else // -[OPEN OR OFF]-
 			user << "<span class='notice'>Nothing Happens.</span>"
+
+
+/obj/machinery/retinal_scanner/MouseDrop_T(mob/target, mob/user)
+	if(user == target)
+		attack_hand(user) //pointless self drag
+		return
+
+	if(scanning) //Cant start another scan while one is running
+		return
+
+	//Both parties must be near the scanner
+	if(user.stat || user.lying || !Adjacent(user) || !user.Adjacent(target) || !iscarbon(target))
+		return
+
+	//Only humans, monkeys and ayyliums have dna and bodyparts
+	if(!istype(target, /mob/living/carbon))
+		user << "<span class='notice'>The scanner doesn't recognise them.</span>"
+		return
+
+	var/mob/living/carbon/T = target
+
+	//Gotta have a head to scan the eyes
+	var foundhead = 0
+	for(var/obj/item/bodypart/BP in T.bodyparts)
+		if(istype(BP, /obj/item/bodypart/head))
+			foundhead = 1
+			break
+
+	if(!foundhead)
+		user << "<span class='warning'>There are no eyes to scan!</span>"
+		return
+
+
+	src.add_fingerprint(user)
+	if(!stat && clearance && driver && !scanning) // -[ABSOLUTELY READY]-
+		flick("scan", src)
+
+		if(!T.has_dna()) //Dunno how this'd happens, but as a precaution.
+			scan_failure()
+			user << "<span class='notice'>The scanner doesn't recognise them.</span>"
+			return
+
+		scanning = 1 //Scan start
+
+		user.visible_message("<span class='warning'>[user.name] holds [target.name] against the retinal scanner!</span>",\
+									   "<span class='notice'>You hold [target.name] against the retinal scanner.</span>")
+
+		var passed = 0 //Whether or not do_after succeeded
+
+		if(T.stat || T.weakened || T.stunned) //If the target would instantly fail do_after on their own, user does do_while instead
+			var startloc = T.loc //Due to the target not being involved in the do_after, we need a way to check they're still there at the end
+			if(do_after(user,10,needhand = 0,target = src)) //takes a second to scan
+				if(T.loc == startloc) //If they haven't moved since we started
+					passed = 1
+		else
+			if(do_after(T,10,needhand = 0,target = src)) //takes a second to scan
+				passed = 1
+
+		if(passed)
+			if(retinal_scan(T))
+				scan_success()
+			else
+				scan_failure()
+				user << "<span class='warning'>Access Denied</span>"
+		else
+			user << "<span class='notice'>Scan Interupted.</span>"
+
+		scanning = 0 //Scan finish
+
+	else if((!clearance || !driver) && !(stat & MAINT)) //Missing pieces but closed
+		user << "<span class='notice'>The device isn't ready for use.</span>"
+	else if(stat & BROKEN) // -[BROKEN]-
+		user << "<span class='warning'>It's too damaged to be used.</span>"
+	else // -[OPEN OR OFF]-
+		user << "<span class='notice'>Nothing Happens.</span>"
+
 
 
 

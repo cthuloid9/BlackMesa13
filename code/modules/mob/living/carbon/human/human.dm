@@ -28,6 +28,8 @@
 	if(dna.species)
 		set_species(dna.species.type)
 
+	assign_bodyparts_dna()
+
 	//initialise organs
 	create_internal_organs()
 

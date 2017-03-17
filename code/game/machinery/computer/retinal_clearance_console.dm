@@ -156,8 +156,8 @@
 						dat += {"<table><tr><td><table>
 						<tr><td>Name:</td><td><A href='?src=\ref[src];choice=Edit Field;field=name'>&nbsp;[active1.fields["name"]]&nbsp;</A></td></tr>
 						<tr><td>ID:</td><td><A href='?src=\ref[src];choice=Edit Field;field=id'>&nbsp;[active1.fields["id"]]&nbsp;</A></td></tr>
-						<tr><td>Sex:</td><td>&nbsp;[active1.fields["sex"]]&nbsp;</td></tr>
-						<tr><td>Age:</td><td>&nbsp;[active1.fields["age"]]&nbsp;</td></tr>"}
+						<tr><td>Sex:</td><td><A href='?src=\ref[src];choice=Edit Field;field=sex'>&nbsp;[active1.fields["sex"]]&nbsp;</A></td></tr>
+						<tr><td>Age:</td><td><A href='?src=\ref[src];choice=Edit Field;field=age'>&nbsp;[active1.fields["age"]]&nbsp;</A></td></tr>"}
 						if(active2_present)
 							dat += "<tr><td>DNA ID:</td><td><A href='?src=\ref[src];choice=Edit Field;field=b_dna'>&nbsp;[active2.fields["b_dna"]]&nbsp;</A></td></tr>"
 
@@ -492,6 +492,18 @@ What a mess.*/
 								active1.fields["id"] = t1
 							if(istype(active2,/datum/data/record))
 								active2.fields["id"] = t1
+					if("sex")
+						if(istype(active1, /datum/data/record))
+							if(active1.fields["sex"] == "Male")
+								active1.fields["sex"] = "Female"
+							else
+								active1.fields["sex"] = "Male"
+					if("age")
+						if(istype(active1, /datum/data/record))
+							var/t1 = input("Please input age:", "Secure. records", active1.fields["age"], null) as num
+							if(!canUseSecurityRecordsConsole(usr, "age", a1))
+								return
+							active1.fields["age"] = t1
 					if("b_dna")
 						if(istype(active2,/datum/data/record) || istype(active1,/datum/data/record))
 							var/t1 = stripped_input(usr, "Please input DNA unique enzymes:", "Secure. records", active2.fields["b_dna"], null)

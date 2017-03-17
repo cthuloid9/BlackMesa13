@@ -126,8 +126,8 @@
 			scanning = 1 //Scan start
 
 
-			user.visible_message("<span class='warning'>[user.name] holds [target.name] up to the retinal scanner!</span>",\
-									   "<span class='notice'>You hold [target.name] up to retinal scanner.</span>")
+			user.visible_message("<span class='warning'>[user.name] holds [H.name] up to the retinal scanner!</span>",\
+									   "<span class='notice'>You hold [H.name] up to retinal scanner.</span>")
 
 			if(do_after(user,10,needhand = 0,target = src)) //takes a second to scan
 

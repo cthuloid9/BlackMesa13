@@ -501,7 +501,7 @@ What a mess.*/
 					if("age")
 						if(istype(active1, /datum/data/record))
 							var/t1 = input("Please input age:", "Secure. records", active1.fields["age"], null) as num
-							if(!canUseSecurityRecordsConsole(usr, "age", a1))
+							if(!canUseRetinalAccessConsole(usr, "age", a1))
 								return
 							active1.fields["age"] = t1
 					if("b_dna")

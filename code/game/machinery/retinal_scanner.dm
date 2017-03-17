@@ -96,11 +96,24 @@
 	playsound(src.loc, 'sound/machines/retinal_scan_denied.ogg', 50, 0)
 	flick("denied", src)
 
+/obj/machinery/retinal_scanner/proc/scan_emagged()
+	playsound(src.loc, 'sound/machines/retinal_scan_denied.ogg', 50, 0)
+	flick("denied", src)
+	spawn(5)
+		playsound(src.loc, "sparks", 50, 0)
+		if(driver)
+			driver.pulsed()
+		use_power(5)
+		playsound(src.loc, 'sound/machines/retinal_scan_pass.ogg', 50, 0)
+
+
 
 // ICON UPDATE
 /obj/machinery/retinal_scanner/update_icon()
 	if(!stat) //No conditions
-		if(clearance && driver) //Configured and ready for use
+		if(emagged)
+			icon_state = "emagged"
+		else if(clearance && driver) //Configured and ready for use
 			icon_state = "ready"
 		else //No access set or missing control board
 			icon_state = "not_ready"
@@ -131,7 +144,10 @@
 
 			if(do_after(user,10,needhand = 0,target = src)) //takes a second to scan
 
-				if(retinal_scan(H))
+
+				if(emagged)
+					scan_emagged()
+				else if(retinal_scan(H))
 					scan_success()
 				else
 					scan_failure()
@@ -299,7 +315,9 @@
 
 			if(do_after(user,10,needhand = 0,target = src)) //takes a second to scan
 				if(istype(user, /mob/living/carbon))
-					if(retinal_scan(user))
+					if(emagged)
+						scan_emagged()
+					else if(retinal_scan(user))
 						scan_success()
 					else
 						scan_failure()
@@ -374,7 +392,9 @@
 				passed = 1
 
 		if(passed)
-			if(retinal_scan(T))
+			if(emagged)
+				scan_emagged()
+			else if(retinal_scan(T))
 				scan_success()
 			else
 				scan_failure()
@@ -392,14 +412,21 @@
 		user << "<span class='notice'>Nothing Happens.</span>"
 
 
-
+/obj/machinery/retinal_scanner/emag_act(mob/user)
+	if(!(stat & NOPOWER))
+		playsound(src.loc, "sparks", 70, 1)
+		emagged = 1
+		update_icon()
 
 
 // EXAMINE
 /obj/machinery/retinal_scanner/examine(mob/user)
 	..()
 	if(!stat) //No statuses
-		if(clearance && driver)
+		if(emagged)
+			user << "<span class='warning'>It is displaying an error:</span>"
+			user << "<span class='warning'>   *CLEARANCE RESTRICTIONS CORRUPTED!</span>"
+		else if(clearance && driver)
 			user << "It is powered and functioning normally."
 		else //Something is missing
 			user << "<span class='warning'>It is displaying an error:</span>"

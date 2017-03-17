@@ -1394,7 +1394,7 @@ var/list/airlock_overlays = list()
 	return !density || (check_access(ID) && !locked && hasPower())
 
 /obj/machinery/door/airlock/emag_act(mob/user)
-	if(!operating && density && hasPower() && !emagged)
+	if(!operating && density && hasPower() && !emagged && !scanner_lock)
 		operating = 1
 		update_icon(AIRLOCK_EMAG, 1)
 		sleep(6)

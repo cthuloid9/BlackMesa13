@@ -32,6 +32,8 @@
 	var/datum/effect_system/spark_spread/spark_system
 	var/damage_deflection = 10
 
+	var/scanner_lock = 0 //Doors with this wont open when bumped, instead requiring external signaling (such as a retinal scanner)
+
 /obj/machinery/door/New()
 	..()
 	if(density)
@@ -74,6 +76,8 @@
 		return
 
 	if(istype(AM, /obj/mecha))
+		if(scanner_lock)
+			return
 		var/obj/mecha/mecha = AM
 		if(density)
 			if(mecha.occupant)
@@ -107,7 +111,7 @@
 	if(!src.requiresID())
 		user = null
 
-	if(density && !emagged)
+	if(density && !emagged && !scanner_lock)
 		if(allowed(user) || src.emergency == 1)
 			open()
 		else
@@ -133,6 +137,8 @@
 		return
 	if(!requiresID())
 		user = null //so allowed(user) always succeeds
+	if(scanner_lock)
+		return
 	if(allowed(user) || emergency == 1)
 		if(density)
 			open()

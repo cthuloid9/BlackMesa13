@@ -28,6 +28,7 @@
 
 	//initialize limbs
 	create_bodyparts()
+	assign_bodyparts_dna()
 
 	if(good_mutations.len) //genetic mutations have been set up.
 		initialize() //initialize monkey dna

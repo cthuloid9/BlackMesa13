@@ -759,3 +759,8 @@
 	for(var/X in internal_organs)
 		var/obj/item/organ/I = X
 		I.Insert(src)
+
+/mob/living/carbon/proc/assign_bodyparts_dna()
+	for(var/obj/item/bodypart/X in bodyparts)
+		if(src.has_dna())
+			X.b_dna = src.dna.unique_enzymes

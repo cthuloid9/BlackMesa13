@@ -203,6 +203,10 @@
 	name = "circuit board (ID Console)"
 	build_path = /obj/machinery/computer/card
 	origin_tech = "programming=3"
+/obj/item/weapon/circuitboard/computer/retinalclearance
+	name = "circuit board (Retinal Clearance Console)"
+	build_path = /obj/machinery/computer/retinalclearance_console
+	origin_tech = "programming=2;biotech=1"
 /obj/item/weapon/circuitboard/computer/card/centcom
 	name = "circuit board (Centcom ID Console)"
 	build_path = /obj/machinery/computer/card/centcom

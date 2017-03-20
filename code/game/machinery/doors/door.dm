@@ -137,13 +137,17 @@
 		return
 	if(!requiresID())
 		user = null //so allowed(user) always succeeds
+
+	if(!density)
+		close()
+		return
+
 	if(scanner_lock)
 		return
+
 	if(allowed(user) || emergency == 1)
 		if(density)
 			open()
-		else
-			close()
 		return
 	if(density)
 		do_animate("deny")

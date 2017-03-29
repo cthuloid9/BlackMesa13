@@ -95,3 +95,19 @@ area/blackmesa
 /area/blackmesa/sector_c/elevator_exit
 	name = "\improper Bathroom"
 	icon_state = "elevator-exit-c"
+
+	///////////////
+	//ABOVEGROUND//
+	///////////////
+
+/area/blackmesa/aboveground
+	name = "sector category"
+	icon_state = "aboveground"
+
+/area/blackmesa/aboveground/desert
+	name = "\improper Desert"
+	icon_state = "desert"
+
+/area/blackmesa/aboveground/waste_processing_plant
+	name = "\improper Waste Processing Entrance"
+	icon_state = "waste_enter"
